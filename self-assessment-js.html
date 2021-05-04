@@ -115,12 +115,12 @@
         if (stepValue == 5) {
           console.log('getting in alright')
           energySavingReportSubmitBtn.click()
+          return;
           // Wait til the submit has done its thing. Should be callback
-          setTimeout(() => {
-            // Increment the step value
-            moveForwardInSteps();
-            return;
-          }, 5000)
+          // setTimeout(() => {
+          //   // Increment the step value
+          //   // moveForwardInSteps();
+          // }, 5000)
         }
         moveForwardInSteps();
       })
