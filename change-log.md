@@ -5,7 +5,9 @@ TODO
 - redirect if noHasCooling to eg. /no-cooling or /we-are-sorry
 - Don’t know? Contact us here link mailto
 - hide disable functionality of pieprogress if to hard
-- 
+- max height for form wrapper
+- fix the header and repsonsive styling
+
 FIX
 - chiller input is not focusable, error if a char is in input
 
@@ -16,7 +18,22 @@ TODO - edge case
 ### Names
 #successActionWrapper is the wrapper after the simple flow on success page
 
+## Styles
+Schedule Meeting
+max-width: 335px
 
 ### Style names
 smalllabeltext
 smalllabeltext--blue
+
+
+
+## Guides
+
+### Where was changes made
+ -- webflow = means that change (version) is only Webflow
+ -- vscode = means that change (version) is only VS Code
+
+ If it doesn't contain a suffix then it is a mutual iteration
+
+file download on case studies page -- webflow
