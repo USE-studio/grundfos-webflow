@@ -16,6 +16,8 @@
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
   // The weAreSorry screen
   let weAreSorry = document.getElementById('weAreSorry')
+  // The weAreSorry screen
+  let energySavingReportSubmitBtn = document.getElementById('energySavingReportSubmitBtn')
 
   // Get all radio button
   // let allinputs = document.getElementsByClassName('has-input-power-to-enable')
@@ -88,6 +90,11 @@
           weAreSorry.classList.add('wearesorry--visible')
           return
         }
+        // If current step is send energy savings report
+        if (stepValue == 5) {
+          console.log('getting in alright')
+          energySavingReportSubmitBtn.click()
+        }
         // Increment the step value
         stepValue++;
         console.log('this: ', this);
@@ -99,7 +106,7 @@
         // Org. code
         r.trigger('tap');
         // Check the progress
-        checkProgress();
+        checkProgress();        
       })
       // The normal button
       .on('click', '.slider-right', function () {
