@@ -2,7 +2,6 @@
 <script>
   var Webflow = Webflow || [];
   let stepValue = 0;
-  let hasNoCoolingTowers = true
   // Define Datalayer
   console.log('reading this far');
   window.dataLayer = window.dataLayer || [];
@@ -83,11 +82,6 @@
       // The normal button
       .on('click', '.slider-right', function () {
         // console.log('clicking right');
-        // Is it relevant at all?
-        if (!hasNoCoolingTowers) {
-          console.log('Oh, we\'re sorry')
-          return
-        }
         // Increment the step value
         stepValue++;
         // Push stepValue to data layer
@@ -106,7 +100,7 @@
       console.log('i am changed')
       var target = e.target || e.srcElement
       console.log(target)
-      hasNoCoolingTowers = false
+      hasNoCoolingTowers = true
     })
   });
 </script>

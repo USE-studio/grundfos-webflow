@@ -1,33 +1,31 @@
-<style>
-.pieprogresswrapper {
-  height: 100px;
-}
 .pieprogress {
   position: relative;
   width: 100px;
   height: 100px;
-  background-color: #f24;
   border-radius: 50%;
   background: conic-gradient(#ECECEC 0deg 360deg);
   transform: translateY(40px);
-  transition: all 0.35s ease;
+  transition: all 0.35s ease !important;
   opacity: 0;
 }
 .pieprogress.pieprogress--revealed {
   transform: translateY(0px);
   opacity: 1;
 }
+.pieprogress.step-one {
+  background: conic-gradient(#0068B4 90deg, #ECECEC 90deg 360deg) !important;
+}
 .pieprogress.step-two {
-  background: conic-gradient(#0068B4 90deg, #ECECEC 90deg 360deg);
+  background: conic-gradient(#0068B4 180deg, #ECECEC 180deg 360deg) !important;
 }
 .pieprogress.step-three {
-  background: conic-gradient(#0068B4 180deg, #ECECEC 180deg 360deg);
+  background: conic-gradient(#0068B4 270deg, #ECECEC 270deg 360deg) !important;
 }
 .pieprogress.step-four {
-  background: conic-gradient(#0068B4 270deg, #ECECEC 270deg 360deg);
+  background: conic-gradient(#0068B4 360deg, #ECECEC 360deg 360deg) !important;
 }
 .pieprogress.step-five {
-  background: conic-gradient(#0068B4 360deg, #ECECEC 360deg 360deg);
+  /* */
 }
 .pieprogress::before {
   content: '';
@@ -55,14 +53,3 @@
   transform: translate(-50%, -50%);
   z-index: 2;
 }
-</style>
-
-<script>
-  let pieProgress = document.querySelector('.pieprogress');
-  // let parentFormWrapper = document.querySelector('.form-content');
-  // parentFormWrapper.appendChild(pieProgress);
-  setTimeout(() => {
-    // Add revealed class name
-    pieProgress.classList.add('pieprogress--revealed');
-  }, 1000)
-  </script>
