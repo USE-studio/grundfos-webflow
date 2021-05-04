@@ -10,6 +10,7 @@
   window.dataLayer.push({
     'which-flow': 'self-assessment-basic'
   });
+  let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
   let thePieProgress = document.querySelector('.pieprogress')
   // The radio button for no cooling towers
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
@@ -17,10 +18,21 @@
   let weAreSorry = document.getElementById('weAreSorry')
 
   // Get all radio button
-  let allinputs = document.getElementsByClassName('radio-button-field')
+  // let allinputs = document.getElementsByClassName('has-input-power-to-enable')
+  let allinputs = document.querySelectorAll('[has-input-power-to-enable]')
   for (let i = 0; i < allinputs.length; i++) {
     console.log(allinputs[i])
+    allinputs[i].addEventListener('click', (e) => {
+      thePieProgressWrapper.classList.remove('pieprogresswrapper--disabled');
+    })
   }
+
+  function disableProgressWrapper() {
+    thePieProgressWrapper.classList.add('pieprogresswrapper--disabled');
+  }
+
+  // Start by disabling the progresswrapper
+  disableProgressWrapper();
 
   Webflow.push(function () {
     var l = $('#flowbaseSlider .w-slider-arrow-left');
@@ -68,6 +80,8 @@
       })
       // The progress button
       .on('click', '.pieprogresswrapper', function () {
+        // Now disable the progresswrapper again until there is an input
+        disableProgressWrapper();
         // Is it relevant at all?
         if (!hasNoCoolingTowers) {
           console.log('Oh, we\'re sorry')
