@@ -66,7 +66,11 @@
       })
       // The progress button
       .on('click', '.pieprogresswrapper', function () {
-        // console.log('clicking right');
+        // Is it relevant at all?
+        if (!hasNoCoolingTowers) {
+          console.log('Oh, we\'re sorry')
+          return
+        }
         // Increment the step value
         stepValue++;
         console.log('this: ', this);
@@ -82,12 +86,7 @@
       })
       // The normal button
       .on('click', '.slider-right', function () {
-        // console.log('clicking right');
-        // Is it relevant at all?
-        if (!hasNoCoolingTowers) {
-          console.log('Oh, we\'re sorry')
-          return
-        }
+        // console.log('clicking right');        
         // Increment the step value
         stepValue++;
         // Push stepValue to data layer
