@@ -13,6 +13,8 @@
   let thePieProgress = document.querySelector('.pieprogress')
   // The radio button for no cooling towers
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
+  // The weAreSorry screen
+  let weAreSorry = document.getElementById('weAreSorry')
 
   // Get all radio button
   let allinputs = document.getElementsByClassName('radio-button-field')
@@ -69,6 +71,7 @@
         // Is it relevant at all?
         if (!hasNoCoolingTowers) {
           console.log('Oh, we\'re sorry')
+          weAreSorry.classList.add('wearesorry--visible')
           return
         }
         // Increment the step value
