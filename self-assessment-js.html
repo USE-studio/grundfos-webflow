@@ -24,7 +24,7 @@
         // Org. code
         l.trigger('tap');
       })
-      .on('click', '.slider-right', function () {
+      .on('click', '.pieprogresswrapper', function () {
         console.log('clicking right');
         // Increment the step value
         stepValue++;
@@ -36,6 +36,29 @@
         // Org. code
         r.trigger('tap');
       });
+      // .on('click', '.slider-left', function () {
+      //   // Decrement the step value
+      //   stepValue--;
+      //   console.log('stepValue decrease: ', stepValue);
+      //   // Push stepValue to data layer
+      //   window.dataLayer.push({
+      //     'stepValue': stepValue
+      //   });
+      //   // Org. code
+      //   l.trigger('tap');
+      // })
+      // .on('click', '.slider-right', function () {
+      //   console.log('clicking right');
+      //   // Increment the step value
+      //   stepValue++;
+      //   console.log('stepValue increase: ', stepValue);
+      //   // Push stepValue to data layer
+      //   window.dataLayer.push({
+      //     'stepValue': stepValue
+      //   });
+      //   // Org. code
+      //   r.trigger('tap');
+      // });
   });
 </script>
 

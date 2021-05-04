@@ -1,0 +1,68 @@
+<style>
+.pieprogresswrapper {
+  height: 100px;
+}
+.pieprogress {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: #f24;
+  border-radius: 50%;
+  background: conic-gradient(#ECECEC 0deg 360deg);
+  transform: translateY(40px);
+  transition: all 0.35s ease;
+  opacity: 0;
+}
+.pieprogress.pieprogress--revealed {
+  transform: translateY(0px);
+  opacity: 1;
+}
+.pieprogress.step-two {
+  background: conic-gradient(#0068B4 90deg, #ECECEC 90deg 360deg);
+}
+.pieprogress.step-three {
+  background: conic-gradient(#0068B4 180deg, #ECECEC 180deg 360deg);
+}
+.pieprogress.step-four {
+  background: conic-gradient(#0068B4 270deg, #ECECEC 270deg 360deg);
+}
+.pieprogress.step-five {
+  background: conic-gradient(#0068B4 360deg, #ECECEC 360deg 360deg);
+}
+.pieprogress::before {
+  content: '';
+  display: block;
+  width: 92%;
+  height: 92%;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 50%;
+}
+.pieprogress::after {
+  content: '';
+  width: 80%;
+  height: 80%;
+  display: block;
+  background-color: #0068B4;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+</style>
+
+<script>
+  let pieProgress = document.querySelector('.pieprogress');
+  // let parentFormWrapper = document.querySelector('.form-content');
+  // parentFormWrapper.appendChild(pieProgress);
+  setTimeout(() => {
+    // Add revealed class name
+    pieProgress.classList.add('pieprogress--revealed');
+  }, 1000)
+  </script>

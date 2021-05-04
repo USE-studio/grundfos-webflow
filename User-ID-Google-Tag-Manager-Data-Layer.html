@@ -1,0 +1,41 @@
+<script>
+
+  // Get the date
+  let date = new Date()
+  
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'landingpage arrival',
+    'userId': date.getTime() //this number must be replaced with an actual User ID
+  })
+  </script>
+
+<script>
+  // org from example https://www.analyticsmania.com/post/google-analytics-user-id-with-google-tag-manager/
+  // function() {
+  //   if ({{dlv - user id}}) {
+  //     var d = new Date();
+  //     d.setTime(d.getTime()+1000*60*60*24*365*2);
+  //     var expires = 'expires='+d.toGMTString();
+  //     document.cookie = 'userId=' + {{dlv - user id}} + '; '+expires+'; path=/';
+  //     return {{dlv - user id}};
+  //   } else if ({{cookie - user id}}) {
+  //       return {{cookie - user id}};
+  //   }
+  //   return;
+  // }
+
+  // Mine
+  function() {
+    if ({{dlv - userId}}) {
+      var d = new Date();
+      d.setTime(d.getTime()+1000*60*60*24*365*2);
+      var expires = 'expires='+d.toGMTString();
+      document.cookie = 'userId=' + {{dlv - userId}} + '; '+expires+'; path=/';
+      return {{dlv - user id}};
+    } else if ({{cookie - userId}}) {
+        return {{cookie - userId}};
+    }
+    return;
+  }
+</script>
