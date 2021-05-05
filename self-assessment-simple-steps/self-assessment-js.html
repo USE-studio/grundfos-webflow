@@ -4,7 +4,7 @@
   var l = $('#flowbaseSlider .w-slider-arrow-left');
   var r = $('#flowbaseSlider .w-slider-arrow-right');
   let stepValue = 0;
-  let hasNoCoolingTowers = true
+  
   // Define Datalayer
   console.log('reading this far');
   window.dataLayer = window.dataLayer || [];
@@ -14,12 +14,38 @@
   });
   let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
   let thePieProgress = document.querySelector('.pieprogress')
+  
+  // ***************************************
+  // cooling towers or not - start variables
+  let hasCoolingTowers = true;
+  // The radio button for having cooling towers
+  let hasCoolingTowers = document.querySelector('#hasCoolingTowers')
   // The radio button for no cooling towers
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
+  // ***************************************
+  // cooling towers or not - end variables
+
+
   // The newsletter button
   let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter')
   // The energy saving button
   let energySavingReportSubmitBtn = document.getElementById('energySavingReportSubmitBtn')
+
+
+  // ***********************************
+  // For adding inputs - start variables
+  // ***********************************
+  let btnAddInputChiller = document.getElementById('btnAddInputChiller')
+  // formWrapToBeCloned
+  let formWrapToBeCloned = document.getElementById('formWrapToBeCloned')
+  // formContentToBeAddedTo
+  let formContentToBeAddedTo = document.getElementById('formContentToBeAddedTo')
+  // input amount / chiller amount
+  let chillerAmount = 1;
+  // ***********************************
+  // For adding inputs - end variables
+  // ***********************************
+
 
   // Get all radio button
   // let allinputs = document.getElementsByClassName('has-input-power-to-enable')
@@ -37,6 +63,26 @@
 
   // Start by disabling the progresswrapper
   disableProgressWrapper();
+
+  // **************************************
+  // Setup btnAddInputChiller logic - start
+  // **************************************
+  function addChiller() {
+    console.log('cloning formwrap')
+    // Increase the chiller value;
+    chillerAmount++;
+    // Copy the form-wrap w/ input element and its child nodes
+    var clonedFormWrap = formWrapToBeCloned.cloneNode(true);
+    // Append the cloned <li> element to <ul> with id="myList1"
+    formContentToBeAddedTo.appendChild(clonedFormWrap);
+  }
+
+  btnAddInputChiller.addEventListener('click', () => {
+    addChiller();
+  })
+  // ************************************
+  // Setup btnAddInputChiller logic - end
+  // ************************************
 
   Webflow.push(function () {
     
@@ -106,7 +152,7 @@
         // Now disable the progresswrapper again until there is an input
         disableProgressWrapper();
         // Is it relevant at all?
-        if (!hasNoCoolingTowers) {
+        if (!hasCoolingTowers) {
           console.log('Oh, we\'re sorry')
           HiddenLinkToNewsletter.click()
           return;
@@ -129,14 +175,17 @@
         moveForwardInSteps();
       });
 
+    // When the hasCoolingTowers radio is clicked
+    hasCoolingTowers.addEventListener('change', (e) => {
+      hasCoolingTowers = true
+    })
     // When the noCoolingTowers radio is clicked
     noCoolingTowers.addEventListener('change', (e) => {
-      console.log('i am changed')
-      var target = e.target || e.srcElement
-      console.log(target)
-      hasNoCoolingTowers = false
+      hasCoolingTowers = false
     })
   });
+
+  //
 </script>
 
 <!-- Here you can change to date slider and manage attributes about it -->
