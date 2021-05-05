@@ -2,12 +2,18 @@ text--blue
 <!-- Ex. Don’t know? Contact us here -->
 
 TODO
+- undo hasNotChiller on we are sorry slide
+- if the amount of chillers step remains then pass the number to next step (chillerAmount)
 - redirect if noHasCooling to eg. /no-cooling or /we-are-sorry
 - Don’t know? Contact us here link mailto
 - hide disable functionality of pieprogress if to hard
 - max height for form wrapper
 - fix the header and repsonsive styling
 - put icons in buttons
+- change AllLinks decoration
+- hide the price in the simple flow
+- fix dot navigation for carousel or find another
+
 
 FIX
 - chiller input is not focusable, error if a char is in input

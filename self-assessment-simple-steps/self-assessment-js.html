@@ -17,7 +17,7 @@
   
   // ***************************************
   // cooling towers or not - start variables
-  let hasCoolingTowers = true;
+  let doesHaveCoolingTowers = true;
   // The radio button for having cooling towers
   let hasCoolingTowers = document.querySelector('#hasCoolingTowers')
   // The radio button for no cooling towers
@@ -39,7 +39,8 @@
   // formWrapToBeCloned
   let formWrapToBeCloned = document.getElementById('formWrapToBeCloned')
   // formContentToBeAddedTo
-  let formContentToBeAddedTo = document.getElementById('formContentToBeAddedTo')
+  // let formContentToBeAddedTo = document.getElementById('formContentToBeAddedTo')
+  let formWrapContainerThatHostsClones = document.getElementById('formWrapContainerThatHostsClones')
   // input amount / chiller amount
   let chillerAmount = 1;
   // ***********************************
@@ -73,8 +74,14 @@
     chillerAmount++;
     // Copy the form-wrap w/ input element and its child nodes
     var clonedFormWrap = formWrapToBeCloned.cloneNode(true);
+    // Get the input child of the one just cloned
+    var theNewBornInput = clonedFormWrap.getElementsByTagName('input')[0]
+    // Set the attributes of this new input
+    theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}-kW`)
+    theNewBornInput.setAttribute('data-name', `Chiller ${chillerAmount} kW`)
+    theNewBornInput.setAttribute('id', `Chiller-${chillerAmount}-kW`)
     // Append the cloned <li> element to <ul> with id="myList1"
-    formContentToBeAddedTo.appendChild(clonedFormWrap);
+    formWrapContainerThatHostsClones.appendChild(clonedFormWrap);
   }
 
   btnAddInputChiller.addEventListener('click', () => {
@@ -152,7 +159,7 @@
         // Now disable the progresswrapper again until there is an input
         disableProgressWrapper();
         // Is it relevant at all?
-        if (!hasCoolingTowers) {
+        if (!doesHaveCoolingTowers) {
           console.log('Oh, we\'re sorry')
           HiddenLinkToNewsletter.click()
           return;
@@ -177,11 +184,11 @@
 
     // When the hasCoolingTowers radio is clicked
     hasCoolingTowers.addEventListener('change', (e) => {
-      hasCoolingTowers = true
+      doesHaveCoolingTowers = true
     })
     // When the noCoolingTowers radio is clicked
     noCoolingTowers.addEventListener('change', (e) => {
-      hasCoolingTowers = false
+      doesHaveCoolingTowers = false
     })
   });
 
