@@ -7,6 +7,7 @@ TODO
 - hide disable functionality of pieprogress if to hard
 - max height for form wrapper
 - fix the header and repsonsive styling
+- put icons in buttons
 
 FIX
 - chiller input is not focusable, error if a char is in input

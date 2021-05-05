@@ -18,7 +18,9 @@
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
   // The weAreSorry screen
   let weAreSorry = document.getElementById('weAreSorry')
-  // The weAreSorry screen
+  // The newsletter button
+  let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter')
+  // The energy saving button
   let energySavingReportSubmitBtn = document.getElementById('energySavingReportSubmitBtn')
 
   // Get all radio button
@@ -108,7 +110,8 @@
         // Is it relevant at all?
         if (!hasNoCoolingTowers) {
           console.log('Oh, we\'re sorry')
-          weAreSorry.classList.add('wearesorry--visible')
+          HiddenLinkToNewsletter.click()
+          // weAreSorry.classList.add('wearesorry--visible')
           return;
         }
         // If current step is send energy savings report
