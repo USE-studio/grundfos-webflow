@@ -26,6 +26,14 @@ max-width: 335px
 smalllabeltext
 smalllabeltext--blue
 
+### Rules
+max-width SectionInner - 1040px
+
+
+
+Section.SectionEmployee
+  SectionInner
+
 
 
 ## Guides
