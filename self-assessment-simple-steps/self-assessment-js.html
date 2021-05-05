@@ -16,8 +16,6 @@
   let thePieProgress = document.querySelector('.pieprogress')
   // The radio button for no cooling towers
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
-  // The weAreSorry screen
-  let weAreSorry = document.getElementById('weAreSorry')
   // The newsletter button
   let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter')
   // The energy saving button
@@ -111,7 +109,6 @@
         if (!hasNoCoolingTowers) {
           console.log('Oh, we\'re sorry')
           HiddenLinkToNewsletter.click()
-          // weAreSorry.classList.add('wearesorry--visible')
           return;
         }
         // If current step is send energy savings report
