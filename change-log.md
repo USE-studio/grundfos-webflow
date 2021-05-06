@@ -3,6 +3,8 @@ text--blue
 
 TODO
 - undo hasNotChiller on we are sorry slide
+- set power to change on cloned inputs
+- add white-space nowrap to add chiller button
 - if the amount of chillers step remains then pass the number to next step (chillerAmount)
 - redirect if noHasCooling to eg. /no-cooling or /we-are-sorry
 - Don’t know? Contact us here link mailto
