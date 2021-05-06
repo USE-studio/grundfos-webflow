@@ -59,15 +59,36 @@
   let pumpEffeciencyPrimary = nominalTotalPowerCorrectedToLoadPrimary / nominalTotalCapacity; // H35 = H37 + H22 - Pump effeciency [kW/RT]
   let yearlyEnergyUsagePrimary = nominalTotalPowerCorrectedToLoadPrimary * 24 * 365 * baselineAverageChillerPlantLoad; // H38 = H37 × 24 × 365 × H10 - Yearly energy usage Primary [kWh]
   
+  // Secondary pumps
+  let VFDsSecondary = true;
+  let nominalTotalPowerSecondary = (14.7360878094534 + 0.02728417 * nominalPower) * numberOfChillers;
+  let nominalTotalPowerCorrectedToLoadSecondary = nominalTotalPowerSecondary * (1 - pumpDesignOverCapacity);
+  let pumpEffeciencySecondary = nominalTotalPowerCorrectedToLoadSecondary / nominalTotalCapacity;
+  let yearlyEnergyUsageSecondary = nominalTotalPowerCorrectedToLoadSecondary * 24 * 365 * baselineAverageChillerPlantLoad; // H45
+  
+  // Cooling tower(s)
+  let VFDsCoolingTowers = true;
+  let nominalTotalPowerCoolingTowers = (-4.64339871663608 + 0.06993997 * nominalPower) * numberOfChillers; // H50 = (−4.64339871663608 + 0.06993997 * H17) * H18
+  let coolingTowerEffeciency = nominalTotalPowerCoolingTowers / nominalTotalCapacity; // H49 = H50 / H22 – Cooling tower effeciency [kW/RT]
+  let yearlyEnergyUsageCoolingTowers = nominalTotalPowerCoolingTowers * 24 * 365 * baselineAverageChillerPlantLoad; // H51 = H50 × 24 × 365 × H10
+  
+  
+  
+  // Summary
+  let yearlyElectricityConsumption = yearlyEnergyUsage + yearlyEnergyUsageCondenserPumps + yearlyEnergyUsagePrimary + yearlyEnergyUsageSecondary + yearlyEnergyUsageCoolingTowers; // H57 = H24 + H31 + H38 + H45 + H51 - Yearly electricity consumption [kWh]
+  let totalElectricityConsumption = yearlyElectricityConsumption / (24 / 365); // H56 = H57÷(24 × 365) - Total electricity concumption [kW]
+  let calculatedPlantBaselineEffeciency = correctedChillerEffeciency + pumpEffeciency + pumpEffeciencyPrimary + pumpEffeciencySecondary + coolingTowerEffeciency; // H58 = H21 + H28 + H35 + H42 + H49 - Calculated plant baseline effeciency [kW/RT]
+  let electricSavingPotentialkWh = (calculatedPlantBaselineEffeciency - bbpSavingTarget) * correctedTotalCapacity * 24 * 365 * baselineAverageChillerPlantLoad; // H59 = (H58 − H7) × H23 × 24 × 365 × H10 – - - Electric saving potential [kWh/year]
+  let CO2SavingPotential = electricSavingPotentialkWh * baselineCO2 / 1000; // H60 = H59 × H12 / 1000 - - - CO2 saving potential [ton/year]
+  let electricSavingPotentialDollars = electricSavingPotentialkWh * baselineElectricPrice; // H61 = H59 × H9 - - - Electric saving potential [USD/year]
 
-  console.log('yearlyEnergyUsagePrimary');
-  console.log(yearlyEnergyUsagePrimary);
-  // H58 = H21 + H28 + H35 + H42 + H49
-  // let calculatedPlantBaselineEffeciency = 
-  //   correctedChillerEffeciency + 
-  // // Major figures
-  // // Electric saving potential [kWh/year]
-  // // H61
-  // let electricSavingPotential // 
+  console.log('electricSavingPotentialkWh');
+  console.log(electricSavingPotentialkWh);
+  
+  console.log('CO2SavingPotential');
+  console.log(CO2SavingPotential);
+  
+  console.log('electricSavingPotentialDollars');
+  console.log(electricSavingPotentialDollars);
 
 </script>
