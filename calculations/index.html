@@ -16,7 +16,6 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    
     <script src="" async defer></script>
   </body>
 </html>
@@ -35,24 +34,40 @@
   let baselineCO2 = 0.68; // H12 - Malaysia. How many kg of CO2 is produced when 1 kWh of electricity is generated. Baseline CO2 [kg CO2/kWh]
   let pumpDesignOverCapacity = 20; // H13 - Pump design over capacity [%]. As only pump nameplate information is used for the pump energy concumption, it is assumed when a pump is designed for a system, the pump is designed with a 20% over capacity factor. This factor ensures to reduce the energy concumption written on the nameplate.
   
-
+  // Chillers
   let nominalPower = 317;                       // H17
   let nominalCapacity = nominalPower * 1.6;     // H16 = H17 * 1.6 (496)
+  let numberOfChillers = 3; // H18 – How many Chillers do you have installed?
+  let chillerEffeciency = nominalPower / nominalCapacity; // H19 – Chiller effeciency [kW/RT]
   let correctedCapacity = nominalCapacity * (1 - estimatedChillerCapacityLoss); // H20 = H16×(1−H11)
-  // H21
   let correctedChillerEffeciency = nominalPower / correctedCapacity; // H21 = H17 / H20
-  // H28 = H30 / H22
-  let pumpEffeciency = nominalPower / correctedCapacity; // H21 = H17 / H20
-  console.log('correctedChillerEffeciency:')
-  console.log(correctedChillerEffeciency)
+  let nominalTotalCapacity = nominalCapacity * numberOfChillers; // H22 = H16 * H18 – Nominal Total Capacity [RT]
+  let correctedTotalCapacity = correctedCapacity * numberOfChillers; // H23 = H20 * H18 – Nominal Total Capacity [RT]
+  let yearlyEnergyUsage = correctedTotalCapacity * correctedChillerEffeciency * 365 * 24 * baselineAverageChillerPlantLoad; // H24 = H23 × H21 × 365 × 24 × H10
+  
+  // Condenser pumps
+  let VFDs = true;
+  let nominalTotalPower = (14.0148778886542 + 0.11630564 * nominalPower) * numberOfChillers; // H29 - Nominal Total Power [kW]
+  let nominalTotalPowerCorrectedToLoad = nominalTotalPower * (1 - pumpDesignOverCapacity); // H30 = H29 * (1 − H13) - Nominal Total Power corrected to load [kW]
+  let pumpEffeciency = nominalTotalPowerCorrectedToLoad / nominalTotalCapacity; // H28 = H30 / H22 - Pump effeciency [kW/RT]
+  let yearlyEnergyUsageCondenserPumps = nominalTotalPowerCorrectedToLoad * 24 * 365 * baselineAverageChillerPlantLoad; // H31 = H30 × 24 × 365 × H10 - Yearly energy usage [kWh]
+  
+  // Primary pumps
+  let VFDsPrimary = true;
+  let nominalTotalPowerPrimary = (14.7360878094534 + 0.02728417 * nominalPower) * numberOfChillers; // H36 = (14.7360878094534 + 0.02728417 × H17) × H18 - Nominal Total Power [kW]
+  let nominalTotalPowerCorrectedToLoadPrimary = nominalTotalPowerPrimary * (1 - pumpDesignOverCapacity); // H37 = H36 × (1 − H13) - Pump effeciency [kW/RT]
+  let pumpEffeciencyPrimary = nominalTotalPowerCorrectedToLoadPrimary / nominalTotalCapacity; // H35 = H37 + H22 - Pump effeciency [kW/RT]
+  let yearlyEnergyUsagePrimary = nominalTotalPowerCorrectedToLoadPrimary * 24 * 365 * baselineAverageChillerPlantLoad; // H38 = H37 × 24 × 365 × H10 - Yearly energy usage Primary [kWh]
+  
 
+  console.log('yearlyEnergyUsagePrimary');
+  console.log(yearlyEnergyUsagePrimary);
   // H58 = H21 + H28 + H35 + H42 + H49
-  let calculatedPlantBaselineEffeciency = 
-    correctedChillerEffeciency + 
-  // Major figures
-  // Electric saving potential [kWh/year]
-  // H61
-  let electricSavingPotential // 
-
+  // let calculatedPlantBaselineEffeciency = 
+  //   correctedChillerEffeciency + 
+  // // Major figures
+  // // Electric saving potential [kWh/year]
+  // // H61
+  // let electricSavingPotential // 
 
 </script>
