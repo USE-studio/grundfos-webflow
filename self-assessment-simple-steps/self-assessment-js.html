@@ -164,6 +164,18 @@
           HiddenLinkToNewsletter.click()
           return;
         }
+        // If current step is about number of Chillers
+        if (stepValue == 3) {
+          // Save data to sessionStorage
+          let testObj = {name: 'hey', value: 234}
+          sessionStorage.setItem('testy', testObj);
+        }
+        // If current step is after number of Chillers
+        if (stepValue == 4) {
+          // Get saved data from sessionStorage
+          let sData = sessionStorage.getItem('testy');
+          console.log(sData);
+        }
         // If current step is send energy savings report
         if (stepValue == 5) {
           console.log('getting in alright')
