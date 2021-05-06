@@ -2,6 +2,10 @@ text--blue
 <!-- Ex. Don’t know? Contact us here -->
 
 TODO
+simple-success
+- check up on email and name form data (Full Name 2:)
+- Hide second Schedule Meeting button
+
 - undo hasNotChiller on we are sorry slide
 - set power to change on cloned inputs
 - add white-space nowrap to add chiller button
