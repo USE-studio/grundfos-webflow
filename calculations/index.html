@@ -61,7 +61,7 @@
   
   // Secondary pumps
   let VFDsSecondary = true;
-  let nominalTotalPowerSecondary = (14.7360878094534 + 0.02728417 * nominalPower) * numberOfChillers;
+  let nominalTotalPowerSecondary = (-28.8607474364754 + 0.26194674 * nominalPower) * numberOfChillers;
   let nominalTotalPowerCorrectedToLoadSecondary = nominalTotalPowerSecondary * (1 - pumpDesignOverCapacity);
   let pumpEffeciencySecondary = nominalTotalPowerCorrectedToLoadSecondary / nominalTotalCapacity;
   let yearlyEnergyUsageSecondary = nominalTotalPowerCorrectedToLoadSecondary * 24 * 365 * baselineAverageChillerPlantLoad; // H45
