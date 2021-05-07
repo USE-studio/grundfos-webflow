@@ -1,0 +1,39 @@
+<script>
+  // Define Datalayer
+  window.dataLayer = window.dataLayer || [];
+
+  // Declare calculate savings buttons
+  let allCalcSavingsBtns = [];
+  let calcSavingsBtnHeader = document.getElementById('calcSavingsBtnHeader');
+  let calcSavingsBtnHero = document.getElementById('calcSavingsBtnHero');
+  let calcSavingsBtnFixedInBottom = document.getElementById('calcSavingsBtnFixedInBottom');
+  allCalcSavingsBtns.push(calcSavingsBtnHeader)
+  allCalcSavingsBtns.push(calcSavingsBtnHero)
+  allCalcSavingsBtns.push(calcSavingsBtnFixedInBottom)
+  
+  // Declare download case studies btn
+  let downloadCaseStudiesBtn = document.getElementById('downloadCaseStudiesBtn');
+
+  let aCSB = allCalcSavingsBtns;
+  for (let i = 0; i < aCSB.length; i++) {
+    aCSB[i].addEventListener('click', (e) => {
+      let target = e.target || e.srcElement;
+      let id = target.getAttribute('id')
+      // Start by pushing some initial data layer stuff
+      window.dataLayer.push({
+        'whichCalcSavingsBtn': id
+      });
+    });
+  };
+
+  // Start by pushing some initial data layer stuff
+  window.dataLayer.push({
+    'whichPage': 'landingpage'
+  });
+
+  downloadCaseStudiesBtn.addEventListener('click', () => {
+    window.dataLayer.push({
+      'clickedDownloadCaseStudiesBtn': true
+    });
+  });
+</script>

@@ -58,3 +58,25 @@ Section.SectionEmployee
  If it doesn't contain a suffix then it is a mutual iteration
 
 file download on case studies page -- webflow
+
+
+
+
+
+
+Loose notes
+<div id="formWrapToBeCloned" class="form-wrap extra-space form-wrap-chiller"
+  style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;">
+  <label for="Chiller-1-kW" class="field-label">Chiller 1</label>
+  <input
+    type="number"
+    class="text-field-2 w-input"
+    maxlength="256"
+    name="Chiller-1-kW"
+    data-name="Chiller 1 kW"
+    placeholder="Input kW"
+    has-input-power-to-enable="1"
+    id="Chiller-1-kW"
+    required=""
+  >
+</div>
