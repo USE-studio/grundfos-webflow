@@ -10,12 +10,34 @@
   window.dataLayer.push({
     'which-flow': 'self-assessment-simple-steps'
   });
-  // Get the BtnSuccessStepProgress
-  let btnSuccessStepProgress = document.getElementById('btnSuccessStepProgress')
+
+  // The Schedule Meeting Hidden Submit Button 
+  let energySavingReportSubmitBtn = document.getElementById('scheduleMeetingHiddenSubmitButton');
+
+  // Get the btnStepProgressScheduleMeeting
+  let btnStepProgressScheduleMeeting = document.getElementById('btnStepProgressScheduleMeeting');
   Webflow.push(function () {
+
+    // Check where we are in the progress of self-ass. steps
+    function checkProgress() {
+      console.log('checkProgress stepValue; ', stepValue)
+      // alert('heya')
+      if (stepValue == 0) {
+        console.log('is 0');
+      }
+      if (stepValue == 1 && stepValue < 2) {
+        console.log('is 1');
+      } 
+    }
+
     // This is called whenever we need to progress one step
     // and increment the stepValue
     function moveForwardInSteps() {
+      // If current step is about number of Chillers
+      if (stepValue == 1) {
+        energySavingReportSubmitBtn.click();
+        return;
+      }
       // Increment the step value
       stepValue++;
       console.log('this: ', this);
@@ -32,8 +54,10 @@
     // The flow slider parent
     $('#flowbaseSlider')
       // The progress button
-      .on('click', '#btnSuccessStepProgress', function () {
+      .on('click', '#btnStepProgressScheduleMeeting', function () {
         moveForwardInSteps();
       })
+
   });
+
 </script>
