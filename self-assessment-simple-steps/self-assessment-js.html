@@ -1,4 +1,5 @@
 <script>
+  // Avoid enter submit
   $(function () {
     $(window).keydown(function (event) {
       if (event.keyCode == 13) {
@@ -34,7 +35,7 @@
   // cooling towers or not - end variables
   
   // No. of Chillers input - start variables
-  let numberOfChillersInput = document.getElementById('Number-of-chillers');
+  // let numberOfChillersInput = document.getElementById('Number-of-chillers');
   // No. of Chillers input - end variables
 
   // The newsletter button
@@ -98,8 +99,31 @@
     theNewBornInput.value = '';
     // Append the cloned <li> element to <ul> with id="myList1"
     formWrapContainerThatHostsClones.appendChild(clonedFormWrap);
+    // calculateAverageChillerInputValue();
+  }
+
+  btnAddInputChiller.addEventListener('click', () => {
+    addChiller();
+  })
+  // Setup btnAddInputChiller logic - end
+  
+  // Store Input values in DL - start
+  function storeTheInputValuesIntheDataLayer() {
+    let inputObject = {};
     // update total number of chiller input
     chillerInputsPresentOnPage = formWrapContainerThatHostsClones.childElementCount;
+    inputObject.noOfChillers = chillerInputsPresentOnPage;
+    // let facilityTypeInput = 
+    window.dataLayer.push({
+      'submission': inputObject
+    });
+    // console.log('numberOfChillersInput: ', numberOfChillersInput)
+  }
+  // Store Input values in DL - end
+  
+  // Calculate average chiller input value - start
+  function calculateAverageChillerInputValue() {
+    // TODO: sum of all input values / chillerInputsPresentOnPage
     // Sum of input values
     let sumChillerValues = 0;
     // Log all values
@@ -116,30 +140,6 @@
     console.log(typeof sumChillerValues)
     // Set the average value that will be set as 
     averageNominalCapacity = sumChillerValues / objectOfClonesInput.length;
-  }
-
-  btnAddInputChiller.addEventListener('click', () => {
-    addChiller();
-  })
-  // Setup btnAddInputChiller logic - end
-  
-  // Store Input values in DL - start
-  function storeTheInputValuesIntheDataLayer() {
-    let inputObject = {};
-    inputObject.noOfChillers = numberOfChillersInput.value !== '' ? parseInt(numberOfChillersInput.value) : 'not defined';
-    // let facilityTypeInput = 
-    window.dataLayer.push({
-      'submission': inputObject
-    });
-    console.log('numberOfChillersInput: ', numberOfChillersInput)
-  }
-  // Store Input values in DL - end
-  
-  // Calculate average chiller input value - start
-  function calculateAverageChillerInputValue() {
-    // TODO: sum of all input values / chillerInputsPresentOnPage
-    // averageValue = chillerInputsPresentOnPage
-    console.log(chillerInputsPresentOnPage)
   }
   // Calculate average chiller input value - end
 
@@ -206,6 +206,7 @@
       })
       // The progress button
       .on('click', '.pieprogresswrapper', function () {
+        console.log('stepValue: ', stepValue)
         // Now disable the progresswrapper again until there is an input
         disableProgressWrapper();
         // Is it relevant at all?
@@ -217,25 +218,21 @@
         // If current step is about number of Chillers
         if (stepValue == 3) {
           // Save data to sessionStorage
-          let numberOfChillersValue = numberOfChillersInput.value !== '' ? parseInt(numberOfChillersInput.value) : 0;
+          // let numberOfChillersValue = numberOfChillersInput.value !== '' ? parseInt(numberOfChillersInput.value) : 0;
+          // update total number of chiller input
+          chillerInputsPresentOnPage = formWrapContainerThatHostsClones.childElementCount;
           console.log('Input no. of chillers');
           console.log('session storage - set');
+          calculateAverageChillerInputValue();
           // calculateAverageChillerInputValue();
           // Set sessionStorage - noOfChillers
           sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
           // Set sessionStorage - averageNominalCapacity
           sessionStorage.setItem('averageNominalCapacity', averageNominalCapacity);
         }
-        // If current step is after number of Chillers
-        if (stepValue == 4) {
-          // Get saved data from sessionStorage
-          let sData = sessionStorage.getItem('noOfChillersValue');
-          console.log('session storage - get');
-          console.log('Number of chillers', sData);
-        }
         // If current step is send energy savings report
         // THE FORM DATA IS SUBMITTED HERE. Facility type, cooling towers, No. of chillers.
-        if (stepValue == 5) {
+        if (stepValue == 4) {
           console.log('getting in alright')
           // Before submitting store the input values in the GTM Datalayer
           storeTheInputValuesIntheDataLayer();
