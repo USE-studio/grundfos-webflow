@@ -1,8 +1,9 @@
+<!-- calculations--self-assessment-simple-success.html -->
 <script>
   // As listed in 'energy_audit_chiller_room_v1.08_myedit'
   // Calculation algorithms
   let noOfChillersValue = sessionStorage.getItem('noOfChillersValue') ? sessionStorage.getItem('noOfChillersValue') : 1;
-  let averageNominalCapacity = sessionStorage.getItem('averageNominalCapacity') ? sessionStorage.getItem('noOfChillersValue') : 1000;
+  let averageNominalCapacity = sessionStorage.getItem('averageNominalCapacity') ? sessionStorage.getItem('averageNominalCapacity') : 1000;
 
   let bbpSavingTarget = 0.75 // H7 – BBP saving target [kW/RT]
   let bbpMinimumSavingCost = 100000 // H8 - This is the cost of the BBP/CaaS installation. BBP minimum saving cost [USD/year].

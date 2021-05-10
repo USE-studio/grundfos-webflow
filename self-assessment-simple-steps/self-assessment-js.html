@@ -1,12 +1,22 @@
-<!-- This script lets us use any component for our arrows. This way we can position freely -->
 <script>
+  $(function () {
+    $(window).keydown(function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  })
   var Webflow = Webflow || [];
   var l = $('#flowbaseSlider .w-slider-arrow-left');
   var r = $('#flowbaseSlider .w-slider-arrow-right');
   let stepValue = 0;
+  // The current chillerInputsPresentOnPage
+  let chillerInputsPresentOnPage = 1; // 1 by default is present
+  let averageValue = 0;
   
   // Define Datalayer
-  console.log('reading this far');
+  console.log('testing sum - 1');
   window.dataLayer = window.dataLayer || [];
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
@@ -15,51 +25,42 @@
   let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
   let thePieProgress = document.querySelector('.pieprogress')
   
-  // ***************************************
   // cooling towers or not - start variables
   let doesHaveCoolingTowers = true;
   // The radio button for having cooling towers
   let hasCoolingTowers = document.querySelector('#hasCoolingTowers')
   // The radio button for no cooling towers
   let noCoolingTowers = document.querySelector('#noCoolingTowers')
-  // ***************************************
   // cooling towers or not - end variables
   
-  
-  // ***************************************
   // No. of Chillers input - start variables
   let numberOfChillersInput = document.getElementById('Number-of-chillers');
-  // ***************************************
   // No. of Chillers input - end variables
 
-
   // The newsletter button
-  let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter')
+  let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter');
   // The energy saving button
-  let energySavingReportSubmitBtn = document.getElementById('energySavingReportSubmitBtn')
+  let energySavingReportSubmitBtn = document.getElementById('energySavingReportSubmitBtn');
 
-
-  // ***********************************
   // For adding inputs - start variables
-  // ***********************************
-  let btnAddInputChiller = document.getElementById('btnAddInputChiller')
+  let btnAddInputChiller = document.getElementById('btnAddInputChiller');
   // formWrapToBeCloned
-  let formWrapToBeCloned = document.getElementById('formWrapToBeCloned')
+  let formWrapToBeCloned = document.getElementById('formWrapToBeCloned');
+  let objectOfClonesInput = [];
   // formContentToBeAddedTo
   // let formContentToBeAddedTo = document.getElementById('formContentToBeAddedTo')
-  let formWrapContainerThatHostsClones = document.getElementById('formWrapContainerThatHostsClones')
+  let formWrapContainerThatHostsClones = document.getElementById('formWrapContainerThatHostsClones');
   // input amount / chiller amount
   let chillerAmount = 1;
-  // ***********************************
+  // averageNominalCapacity to be set in sessionStorage on step 5
+  let averageNominalCapacity = 0;
   // For adding inputs - end variables
-  // ***********************************
-
 
   // Get all radio button
   // let allinputs = document.getElementsByClassName('has-input-power-to-enable')
-  let allinputs = document.querySelectorAll('[has-input-power-to-enable]')
+  let allinputs = document.querySelectorAll('[has-input-power-to-enable]');
   for (let i = 0; i < allinputs.length; i++) {
-    console.log(allinputs[i])
+    console.log(allinputs[i]);
     allinputs[i].addEventListener('click', (e) => {
       thePieProgressWrapper.classList.remove('pieprogresswrapper--disabled');
     })
@@ -72,36 +73,57 @@
   // Start by disabling the progresswrapper
   disableProgressWrapper();
 
-  // **************************************
-  // Setup btnAddInputChiller logic - start
-  // **************************************
+  // Clone btnAddInputChiller logic - start
   function addChiller() {
+    // Do this only once
+    if (objectOfClonesInput.length === 0) {
+      // Add the clone org to the array of inputs
+      objectOfClonesInput.push( parseInt(formWrapToBeCloned.getElementsByTagName('input')[0].value) );
+    }
     console.log('cloning formwrap')
     // Increase the chiller value;
     chillerAmount++;
     // Copy the form-wrap w/ input element and its child nodes
     var clonedFormWrap = formWrapToBeCloned.cloneNode(true);
     // Get the input child of the one just cloned
-    var theNewBornInput = clonedFormWrap.getElementsByTagName('input')[0]
+    var theNewBornInput = clonedFormWrap.getElementsByTagName('input')[0];
+    // Add the clone to the array of inputs
+    objectOfClonesInput.push( parseInt(theNewBornInput.value) );
     // Set the attributes of this new input
     theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}-kW`)
     theNewBornInput.setAttribute('data-name', `Chiller ${chillerAmount} kW`)
     theNewBornInput.setAttribute('id', `Chiller-${chillerAmount}-kW`)
+    theNewBornInput.setAttribute('has-input-power-to-enable', 1)
+    theNewBornInput.placeholder = 'Input kW';
+    theNewBornInput.value = '';
     // Append the cloned <li> element to <ul> with id="myList1"
     formWrapContainerThatHostsClones.appendChild(clonedFormWrap);
+    // update total number of chiller input
+    chillerInputsPresentOnPage = formWrapContainerThatHostsClones.childElementCount;
+    // Sum of input values
+    let sumChillerValues = 0;
+    // Log all values
+    console.log('Log all values');
+    for (let i = 0; i < objectOfClonesInput.length; i++) {
+      let inputValue = parseInt(objectOfClonesInput[i])
+      console.log('objectOfClonesInput');
+      console.log(objectOfClonesInput);
+      sumChillerValues += parseInt(inputValue);
+      // sumChillerValues += parseInt(inputValue);
+    }
+    console.log('sumChillerValues')
+    console.log(sumChillerValues)
+    console.log(typeof sumChillerValues)
+    // Set the average value that will be set as 
+    averageNominalCapacity = sumChillerValues / objectOfClonesInput.length;
   }
 
   btnAddInputChiller.addEventListener('click', () => {
     addChiller();
   })
-  // ************************************
   // Setup btnAddInputChiller logic - end
-  // ************************************
   
-  
-  // ************************************
   // Store Input values in DL - start
-  // ************************************
   function storeTheInputValuesIntheDataLayer() {
     let inputObject = {};
     inputObject.noOfChillers = numberOfChillersInput.value !== '' ? parseInt(numberOfChillersInput.value) : 'not defined';
@@ -111,23 +133,27 @@
     });
     console.log('numberOfChillersInput: ', numberOfChillersInput)
   }
-  // ************************************
   // Store Input values in DL - end
-  // ************************************
+  
+  // Calculate average chiller input value - start
+  function calculateAverageChillerInputValue() {
+    // TODO: sum of all input values / chillerInputsPresentOnPage
+    // averageValue = chillerInputsPresentOnPage
+    console.log(chillerInputsPresentOnPage)
+  }
+  // Calculate average chiller input value - end
 
   Webflow.push(function () {
     
     // Check where we are in the progress of self-ass. steps
     function checkProgress() {
       console.log('checkProgress stepValue; ', stepValue)
-      // alert('heya')
       if (stepValue == 0) {
         console.log('is 0')
       }
       if (stepValue == 1 && stepValue < 2) {
         console.log('is 1')
         console.log(document.querySelector('.pieprogress'))
-        // alert('it should be visible now')
         thePieProgress.classList.add('pieprogress--revealed')
       }
       else if (stepValue == 2 && stepValue < 3) {
@@ -192,8 +218,13 @@
         if (stepValue == 3) {
           // Save data to sessionStorage
           let numberOfChillersValue = numberOfChillersInput.value !== '' ? parseInt(numberOfChillersInput.value) : 0;
+          console.log('Input no. of chillers');
           console.log('session storage - set');
-          sessionStorage.setItem('noOfChillersValue', numberOfChillersValue);
+          // calculateAverageChillerInputValue();
+          // Set sessionStorage - noOfChillers
+          sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
+          // Set sessionStorage - averageNominalCapacity
+          sessionStorage.setItem('averageNominalCapacity', averageNominalCapacity);
         }
         // If current step is after number of Chillers
         if (stepValue == 4) {
@@ -210,11 +241,6 @@
           storeTheInputValuesIntheDataLayer();
           energySavingReportSubmitBtn.click();
           return;
-          // Wait til the submit has done its thing. Should be callback
-          // setTimeout(() => {
-          //   // Increment the step value
-          //   // moveForwardInSteps();
-          // }, 5000)
         }
         moveForwardInSteps();
       })
@@ -231,36 +257,5 @@
     noCoolingTowers.addEventListener('change', (e) => {
       doesHaveCoolingTowers = false
     })
-  });
-
-  //
-</script>
-
-<!-- Here you can change to date slider and manage attributes about it -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.1.2/js/ion.rangeSlider.min.js"></script>
-<script>
-  $("#range_price").ionRangeSlider({
-    grid: true,
-    min: 3000,
-    max: 10000,
-    from: 2500,
-    prefix: "", // org. $
-    postfix: " sq ft",
-    hide_min_max: true,
-    decorate_both: true,
-    force_edges: true,
-    step: 50
-  });
-  $("#range_date").ionRangeSlider({
-    grid: true,
-    min: 0,
-    max: 12,
-    from_min: 0.5,
-    from: 1,
-    prefix: "M",
-    postfix: " month(s)",
-    hide_min_max: true,
-    force_edges: true,
-    step: 0.5
   });
 </script>
