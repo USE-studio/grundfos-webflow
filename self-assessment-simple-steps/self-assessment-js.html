@@ -88,8 +88,10 @@
     var clonedFormWrap = formWrapToBeCloned.cloneNode(true);
     // Get the input child of the one just cloned
     var theNewBornInput = clonedFormWrap.getElementsByTagName('input')[0];
+    var theNewBornInputLabel = clonedFormWrap.getElementsByTagName('label')[0];
+    theNewBornInputLabel.innerHTML = `Chiller ${chillerAmount}`;
     // Set the attributes of this new input
-    theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}-kW`)
+    theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}-kW`);
     theNewBornInput.setAttribute('data-name', `Chiller ${chillerAmount} kW`)
     theNewBornInput.setAttribute('id', `Chiller-${chillerAmount}-kW`)
     theNewBornInput.setAttribute('has-input-power-to-enable', 1)
