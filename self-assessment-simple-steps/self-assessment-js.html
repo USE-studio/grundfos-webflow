@@ -17,7 +17,7 @@
   let averageValue = 0;
   
   // Define Datalayer
-  console.log('testing sum - 1c');
+  console.log('testing sum - 1d');
   window.dataLayer = window.dataLayer || [];
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
@@ -79,7 +79,7 @@
     // Do this only once
     if (objectOfClonesInput.length === 0) {
       // Add the clone org to the array of inputs
-      objectOfClonesInput.push( parseInt(formWrapToBeCloned.getElementsByTagName('input')[0].value) );
+      objectOfClonesInput.push( formWrapToBeCloned.getElementsByTagName('input')[0] );
     }
     // console.log('cloning formwrap')
     // Increase the chiller value;
@@ -96,7 +96,7 @@
     theNewBornInput.placeholder = 'Input kW';
     // theNewBornInput.value = 0;
     // Add the clone to the array of inputs
-    objectOfClonesInput.push( parseInt(theNewBornInput.value) );
+    objectOfClonesInput.push( theNewBornInput );
     console.log('objectOfClonesInput')
     console.log(objectOfClonesInput)
     // Append the cloned <li> element to <ul> with id="myList1"
@@ -131,7 +131,7 @@
     // Log all values
     // console.log('Log all values');
     for (let i = 0; i < objectOfClonesInput.length; i++) {
-      let inputValue = parseInt(objectOfClonesInput[i])
+      let inputValue = parseInt(objectOfClonesInput[i].value)
       // console.log('objectOfClonesInput');
       // console.log(objectOfClonesInput);
       sumChillerValues += parseInt(inputValue);
