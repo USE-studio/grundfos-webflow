@@ -72,7 +72,7 @@
   }
 
   // Start by disabling the progresswrapper
-  disableProgressWrapper();
+  // disableProgressWrapper();
 
   // Clone btnAddInputChiller logic - start
   function addChiller() {
@@ -215,7 +215,7 @@
       .on('click', '.pieprogresswrapper', function () {
         console.log('stepValue: ', stepValue)
         // Now disable the progresswrapper again until there is an input
-        disableProgressWrapper();
+        // disableProgressWrapper();
         // The visitor has no cooling towers
         if (!doesHaveCoolingTowers) {
           console.log('Oh, we\'re sorry')
