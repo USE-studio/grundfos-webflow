@@ -91,11 +91,11 @@
     var theNewBornInputLabel = clonedFormWrap.getElementsByTagName('label')[0];
     theNewBornInputLabel.innerHTML = `Chiller ${chillerAmount}`;
     // Set the attributes of this new input
-    theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}-kW`);
-    theNewBornInput.setAttribute('data-name', `Chiller ${chillerAmount} kW`)
-    theNewBornInput.setAttribute('id', `Chiller-${chillerAmount}-kW`)
+    theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}`);
+    theNewBornInput.setAttribute('data-name', `Chiller ${chillerAmount}`)
+    theNewBornInput.setAttribute('id', `Chiller-${chillerAmount}`)
     theNewBornInput.setAttribute('has-input-power-to-enable', 1)
-    theNewBornInput.placeholder = 'Input kW';
+    theNewBornInput.placeholder = 'Input number in kW or RT';
     // theNewBornInput.value = 0;
     // Add the clone to the array of inputs
     objectOfClonesInput.push( theNewBornInput );
@@ -134,20 +134,22 @@
     // console.log('Log all values');
     for (let i = 0; i < objectOfClonesInput.length; i++) {
       let inputValue = parseInt(objectOfClonesInput[i].value)
-      // console.log('objectOfClonesInput');
-      // console.log(objectOfClonesInput);
       sumChillerValues += parseInt(inputValue);
       console.log('inputValue');
       console.log(inputValue);
-      // sumChillerValues += parseInt(inputValue);
     }
-    // console.log('sumChillerValues')
-    // console.log(sumChillerValues)
     // Set the average value that will be set as 
     averageNominalCapacity = sumChillerValues / objectOfClonesInput.length;
     // Set sessionStorage - noOfChillers
     sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
     // Set sessionStorage - averageNominalCapacity
+    if (iskW) {
+      averageNominalCapacity = averageNominalCapacity / 1.6;
+      console.log('it is in kW');
+    }
+    else {
+      console.log('it is in RT');
+    }
     sessionStorage.setItem('averageNominalCapacity', averageNominalCapacity);
   }
   // Calculate average chiller input value - end
@@ -161,8 +163,6 @@
         // console.log('is 0')
       }
       if (stepValue == 1 && stepValue < 2) {
-        // console.log('is 1')
-        // console.log(document.querySelector('.pieprogress'))
         thePieProgress.classList.add('pieprogress--revealed')
       }
       else if (stepValue == 2 && stepValue < 3) {
