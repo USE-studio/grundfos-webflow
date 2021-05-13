@@ -189,7 +189,7 @@
       .on('click', '.slider-left', function () {
         // Decrement the step value
         stepValue--;
-        // console.log('stepValue decrease: ', stepValue);
+        // console.log('go back: ', stepValue);
         // Push stepValue to data layer
         window.dataLayer.push({
           'stepValue': stepValue
@@ -223,7 +223,7 @@
         // If current step is send energy savings report
         // THE FORM DATA IS SUBMITTED HERE. Facility type, cooling towers, No. of chillers.
         if (stepValue === 4) {
-          console.log('getting in alright')
+          console.log('submit')
           // Before submitting store the input values in the GTM Datalayer
           storeTheInputValuesIntheDataLayer();
           energySavingReportSubmitBtn.click();
