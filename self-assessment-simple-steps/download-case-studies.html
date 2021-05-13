@@ -1,0 +1,28 @@
+<!-- download-case-studies -->
+<script>
+  // var Webflow = Webflow || [];
+  // Put the datalayer in the window object
+  window.dataLayer = window.dataLayer || [];
+  // Start by pushing some initial data layer stuff
+  window.dataLayer.push({
+    'whichPage': 'download-case-studies',
+    'meetingScheduled': true
+  });
+
+  // The take me home button
+  // let takeMeHomeFromDownloadCaseStudies = document.getElementById('takeMeHomeFromDownloadCaseStudies');
+  let btnDownloadCaseStudies = document.getElementById('btnDownloadCaseStudies');
+
+  // Listen to the Download Case Studies button
+  btnDownloadCaseStudies.addEventListener('click', () => {
+    // Start by pushing some initial data layer stuff
+    window.dataLayer.push({
+      'downloadCaseStudiesBtnWasclicked': true
+    });
+  })
+  
+  // The help icon button in the header. we need to hide it
+  // let helpIconBtnInHeader = document.getElementById('helpIconBtnInHeader');
+  // helpIconBtnInHeader.style.display = none;
+
+</script>
