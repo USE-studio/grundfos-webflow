@@ -19,7 +19,7 @@
   // Define Datalayer
   console.log('testing sum - 1d');
   window.dataLayer = window.dataLayer || [];
-  let inputObject = {};
+  let dLInputObject = {};
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
     'which-flow': 'self-assessment-simple-steps'
@@ -27,17 +27,12 @@
   let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
   let thePieProgress = document.querySelector('.pieprogress')
   
+  let fTypeOptions = document.querySelectorAll('.facilitytype--option')
   // cooling towers or not - start variables
   let doesHaveCoolingTowers = true;
-  // The radio button for having cooling towers
+  // The radio button for having cooling towers or not
   let hasCoolingTowersRadioBtn = document.querySelector('#hasCoolingTowers')
-  // The radio button for no cooling towers
   let noCoolingTowersRadioBtn = document.querySelector('#noCoolingTowers')
-  // cooling towers or not - end variables
-  
-  // No. of Chillers input - start variables
-  // let numberOfChillersInput = document.getElementById('Number-of-chillers');
-  // No. of Chillers input - end variables
 
   // The newsletter button
   let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter');
@@ -56,10 +51,8 @@
   let chillerAmount = 1;
   // averageNominalCapacity to be set in sessionStorage on step 5
   let averageNominalCapacity = 0;
-  // For adding inputs - end variables
 
   // Get all radio button
-  // let allinputs = document.getElementsByClassName('has-input-power-to-enable')
   let allinputs = document.querySelectorAll('[has-input-power-to-enable]');
   for (let i = 0; i < allinputs.length; i++) {
     // console.log(allinputs[i]);
@@ -67,13 +60,6 @@
       thePieProgressWrapper.classList.remove('pieprogresswrapper--disabled');
     })
   }
-
-  function disableProgressWrapper() {
-    thePieProgressWrapper.classList.add('pieprogresswrapper--disabled');
-  }
-
-  // Start by disabling the progresswrapper
-  // disableProgressWrapper();
 
   // Clone btnAddInputChiller logic - start
   function addChiller() {
@@ -116,10 +102,10 @@
   function storeTheInputValuesIntheDataLayer() {
     // update total number of chiller input
     chillerInputsPresentOnPage = formWrapContainerThatHostsClones.childElementCount;
-    inputObject.noOfChillers = chillerInputsPresentOnPage;
+    dLInputObject.noOfChillers = chillerInputsPresentOnPage;
     // let facilityTypeInput = 
     window.dataLayer.push({
-      'submission': inputObject
+      'submission': dLInputObject
     });
     // console.log('numberOfChillersInput: ', numberOfChillersInput)
   }
@@ -250,13 +236,22 @@
         moveForwardInSteps();
       });
 
+    fTypeOptions.forEach((elem) => {
+      elem.addEventListener("change", function(event) {
+        var item = event.target.value;
+        dLInputObject.facilityType = item; 
+      });
+    });
     // When the hasCoolingTowers radio is clicked
     hasCoolingTowersRadioBtn.addEventListener('change', (e) => {
       doesHaveCoolingTowers = true
+      dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
     })
     // When the noCoolingTowers radio is clicked
     noCoolingTowersRadioBtn.addEventListener('change', (e) => {
       doesHaveCoolingTowers = false
+      dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
     })
+    
   });
 </script>
