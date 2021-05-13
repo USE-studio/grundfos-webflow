@@ -24,6 +24,7 @@
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
+    'whichPage': 'self-assessment-simple-steps',
     'which-flow': 'self-assessment-simple-steps'
   });
   let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
@@ -119,8 +120,7 @@
   // Calculate average chiller input value - start
   function calculateAverageChillerInputValue() {
     // TODO: sum of all input values / chillerInputsPresentOnPage
-    // Log all values
-    // console.log('Log all values');
+    sumChillerValues = 0;
     for (let i = 0; i < objectOfClonesInput.length; i++) {
       let inputValue = parseInt(objectOfClonesInput[i].value)
       sumChillerValues += parseInt(inputValue);
