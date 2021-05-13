@@ -15,6 +15,7 @@
   // The current chillerInputsPresentOnPage
   let chillerInputsPresentOnPage = 1; // 1 by default is present
   let averageValue = 0;
+  let facilityTypeIsSet = false;
   
   // Define Datalayer
   console.log('testing sum - 1d');
@@ -202,6 +203,9 @@
       // The progress button
       .on('click', '.pieprogresswrapper', function () {
         console.log('stepValue: ', stepValue)
+        if (!facilityTypeIsSet) {
+          return;
+        }
         // Now disable the progresswrapper again until there is an input
         // disableProgressWrapper();
         // The visitor has no cooling towers
@@ -239,6 +243,7 @@
     fTypeOptions.forEach((elem) => {
       elem.addEventListener("change", function(event) {
         var item = event.target.value;
+        facilityTypeIsSet = true;
         dLInputObject.facilityType = item; 
       });
     });
