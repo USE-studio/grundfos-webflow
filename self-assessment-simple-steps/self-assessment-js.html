@@ -13,6 +13,7 @@
   var r = $('#flowbaseSlider .w-slider-arrow-right');
   let stepValue = 0;
   // The current chillerInputsPresentOnPage
+  let sumChillerValues = 0;
   let chillerInputsPresentOnPage = 1; // 1 by default is present
   let averageValue = 0;
   let facilityTypeIsSet = false;
@@ -118,8 +119,6 @@
   // Calculate average chiller input value - start
   function calculateAverageChillerInputValue() {
     // TODO: sum of all input values / chillerInputsPresentOnPage
-    // Sum of input values
-    let sumChillerValues = 0;
     // Log all values
     // console.log('Log all values');
     for (let i = 0; i < objectOfClonesInput.length; i++) {
