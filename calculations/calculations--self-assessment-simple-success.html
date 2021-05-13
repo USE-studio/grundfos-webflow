@@ -52,7 +52,6 @@
   let yearlyEnergyUsageCoolingTowers = nominalTotalPowerCoolingTowers * 24 * 365 * baselineAverageChillerPlantLoad; // H51 = H50 × 24 × 365 × H10
   
   
-  
   // Summary
   let yearlyElectricityConsumption = yearlyEnergyUsage + yearlyEnergyUsageCondenserPumps + yearlyEnergyUsagePrimary + yearlyEnergyUsageSecondary + yearlyEnergyUsageCoolingTowers; // H57 = H24 + H31 + H38 + H45 + H51 - Yearly electricity consumption [kWh]
   let totalElectricityConsumption = yearlyElectricityConsumption / (24 / 365); // H56 = H57÷(24 × 365) - Total electricity concumption [kW]

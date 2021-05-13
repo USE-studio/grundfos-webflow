@@ -19,6 +19,7 @@
   // Define Datalayer
   console.log('testing sum - 1d');
   window.dataLayer = window.dataLayer || [];
+  let inputObject = {};
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
     'which-flow': 'self-assessment-simple-steps'
@@ -113,7 +114,6 @@
   
   // Store Input values in DL - start
   function storeTheInputValuesIntheDataLayer() {
-    let inputObject = {};
     // update total number of chiller input
     chillerInputsPresentOnPage = formWrapContainerThatHostsClones.childElementCount;
     inputObject.noOfChillers = chillerInputsPresentOnPage;

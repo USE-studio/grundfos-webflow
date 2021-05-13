@@ -3,6 +3,7 @@ text--blue
 
 TODO
 simple-success
+- add header to simple-success
 - check up on email and name form data (Full Name 2:)
 - Hide second Schedule Meeting button
 
