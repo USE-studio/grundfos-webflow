@@ -17,18 +17,34 @@ let doesHaveCoolingTowers = true;
 let hasCoolingTowersRadioBtn = document.querySelector('#hasCoolingTowers')
 let noCoolingTowersRadioBtn = document.querySelector('#noCoolingTowers')
 
-  // When the hasCoolingTowers radio is clicked
-  hasCoolingTowersRadioBtn.addEventListener('change', (e) => {
-    doesHaveCoolingTowers = true
-    dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
-  })
-  // When the noCoolingTowers radio is clicked
-  noCoolingTowersRadioBtn.addEventListener('change', (e) => {
-    doesHaveCoolingTowers = false
-    dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
-  })
+// When the hasCoolingTowers radio is clicked
+hasCoolingTowersRadioBtn.addEventListener('change', (e) => {
+  doesHaveCoolingTowers = true
+  dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
+})
+// When the noCoolingTowers radio is clicked
+noCoolingTowersRadioBtn.addEventListener('change', (e) => {
+  doesHaveCoolingTowers = false
+  dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
+})
 
 
+
+<!--  --> = missing (Needs implementation)
+
+self-assessment-simple-steps.html
+- - - - - - - - - - - - - - - - - -
+### On init
+window.dataLayer.push({
+  <!-- 'whichPage': 'self-assessment-simple-steps', -->
+  'which-flow': 'self-assessment-simple-steps'
+});
+
+### On submit
+window.dataLayer.push({
+  'scheduledMeeting': true
+});
+- - - - - - - - - - - - - - - - - -
 
 
 
@@ -45,18 +61,19 @@ window.dataLayer.push({
 window.dataLayer.push({
   'scheduledMeeting': true
 });
+- - - - - - - - - - - - - - - - - -
 
 
-self-assessment-simple-success.html
+
+
+self-assessment-simple-help.html
 - - - - - - - - - - - - - - - - - -
 ### On init
-window.dataLayer.push({
-  'selfAssessmentSubmission': true,
-  'whichPage': 'simple-success',
-  'which-flow': 'self-assessment-simple-steps'
+ window.dataLayer.push({
+  'whichPage': 'self-assessment-simple-help',
+  'askedForHelp': true
 });
 
 ### On submit
-window.dataLayer.push({
-  'scheduledMeeting': true
-});
+No submit
+- - - - - - - - - - - - - - - - - -

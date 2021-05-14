@@ -153,19 +153,17 @@
       }
       if (stepValue == 1 && stepValue < 2) {
         thePieProgress.classList.add('pieprogress--revealed')
+        thePieProgress.classList.add('step-one')
       }
       else if (stepValue == 2 && stepValue < 3) {
         // console.log('is 2')
-        thePieProgress.classList.add('step-one')
+        thePieProgress.classList.add('step-two')
       }
       else if (stepValue == 3 && stepValue < 4) {
         // console.log('is 3')
-        thePieProgress.classList.add('step-two')
-      }
-      else if (stepValue == 4 && stepValue < 5) {
         thePieProgress.classList.add('step-three')
       }
-      else if (stepValue == 5 && stepValue < 6) {
+      else if (stepValue == 4 && stepValue < 5) {
         thePieProgress.classList.add('step-four')
       }
     }
