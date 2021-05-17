@@ -19,7 +19,7 @@
   let facilityTypeIsSet = false;
   
   // Define Datalayer
-  console.log('1h - gtm.load');
+  console.log('1i - testing dummy button');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -27,6 +27,7 @@
     'whichPage': 'self-assessment-simple-steps',
     'which-flow': 'self-assessment-simple-steps'
   });
+
   // The progress pie parent
   let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
   let thePieProgress = document.querySelector('.pieprogress')
@@ -66,6 +67,13 @@
       thePieProgressWrapper.classList.remove('pieprogresswrapper--disabled');
     })
   }
+
+  let dummyButton = document.createElement('div')
+  dummyButton.innerHTML = 'testy'
+  document.appendChild( dummyButton )
+  dummyButton.addEventListener('click', (e) => {
+    alert('hey')
+  })
 
   // Start by assigning values if they exist in url params
   const queryString = window.location.search;
