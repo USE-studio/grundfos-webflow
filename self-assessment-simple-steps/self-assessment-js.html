@@ -70,7 +70,7 @@
 
   let dummyButton = document.createElement('div')
   dummyButton.innerHTML = 'testy'
-  document.appendChild( dummyButton )
+  document.body.appendChild( dummyButton )
   dummyButton.addEventListener('click', (e) => {
     alert('hey')
   })
