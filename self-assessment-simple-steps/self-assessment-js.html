@@ -129,10 +129,15 @@
   if (urlParams.get('coolingTowers')) {
     const coolingTowers = urlParams.get('coolingTowers')
     radioBtnsCoolingTowers.forEach((elem) => {
-      if (String(elem.value) === String(coolingTowers)) {
+      if (String(coolingTowers) === true && String(elem.value) === 'Yes') {
         elem.checked = true
+        console.log('has yeeeeeeees')
         // Set this flag to true as it was found in the url
         coolingTowerOptionIsSet = true
+      }
+      else {
+        console.log('has notttttttt')
+        elem.checked = true
       }
     });
   }
