@@ -1,6 +1,8 @@
 <div id="ajaxContent"></div>
 <script>
-  const scriptUrlRaw = 'https://raw.githubusercontent.com/USE-studio/grundfos-webflow/master/self-assessment-simple-steps/self-assessment-js.html'
+  var versionUpdate = (new Date()).getTime();
+  const scriptUrlRaw = 'https://raw.githubusercontent.com/USE-studio/grundfos-webflow/master/self-assessment-simple-steps/self-assessment-js.html?v='
+  scriptUrlRaw += versionUpdate
   var Webflow = Webflow || [];
   Webflow.push(function() {
     $.get(scriptUrlRaw, function(data) { $('#ajaxContent').append(data); });
