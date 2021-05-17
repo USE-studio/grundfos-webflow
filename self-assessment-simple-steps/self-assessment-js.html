@@ -66,6 +66,22 @@
     })
   }
 
+  // Start by assigning values if they exist in url params
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.get('facilityType')) {
+    const facilityType = urlParams.get('facilityType')
+    console.log('facilityType');
+    console.log(facilityType);
+    fTypeOptions.forEach((elem) => {
+      if (String(elem.value) === String(facilityType)) {
+        elem.checked = true
+        console.log('elem.value is checked')
+      }
+    });
+  }
+
   // Clone btnAddInputChiller logic - start
   function addChiller() {
     // Do this only once
