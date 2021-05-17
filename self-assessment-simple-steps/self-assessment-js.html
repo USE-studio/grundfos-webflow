@@ -116,6 +116,7 @@
     fTypeOptions.forEach((elem) => {
       if (String(elem.value) === String(facilityType)) {
         elem.checked = true
+        facilityTypeIsSet = true
         console.log('elem.value is checked')
       }
     });
@@ -260,6 +261,7 @@
       // The progress button
       .on('click', '.pieprogresswrapper', function () {
         console.log('stepValue: ', stepValue)
+        // Is facility type set yet
         if (!facilityTypeIsSet) {
           return;
         }
