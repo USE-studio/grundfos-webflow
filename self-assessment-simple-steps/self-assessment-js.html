@@ -8,10 +8,10 @@
       }
     });
   })
-  var Webflow = Webflow || [];
-  var l = $('#flowbaseSlider .w-slider-arrow-left');
-  var r = $('#flowbaseSlider .w-slider-arrow-right');
-  let stepValue = 0;
+  var Webflow = Webflow || []; // Define webflow
+  var l = $('#flowbaseSlider .w-slider-arrow-left'); // back arrow btn
+  var r = $('#flowbaseSlider .w-slider-arrow-right'); // forward arrow btn
+  let stepValue = 0; 
   // The current chillerInputsPresentOnPage
   let sumChillerValues = 0;
   let chillerInputsPresentOnPage = 1; // 1 by default is present
@@ -177,6 +177,7 @@
       // console.log('stepValue increase: ', stepValue);
       // Push stepValue to data layer
       window.dataLayer.push({
+        'event': `current stepValue is: ${stepValue}`,
         'stepValue': stepValue
       });
       // Org. code
