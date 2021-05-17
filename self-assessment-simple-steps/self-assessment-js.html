@@ -72,8 +72,9 @@
     let url = 'https://grundfoscampaign.webflow.io/self-assessment-simple';
     let params = {};
     fTypeOptions.forEach((element) => {
-      if (element.value.length > 0)
+      if (element.value.length > 0 && element.checked) {
         params[element.id] = element.value;
+      }
     });
     let esc = encodeURIComponent;
     let query = Object.keys(params)
