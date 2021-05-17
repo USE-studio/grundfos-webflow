@@ -86,7 +86,8 @@
     });
     let esc = encodeURIComponent;
     let query = Object.keys(params)
-      .map(k => esc(k) + '=' + esc(params[k]))
+      // .map(k => esc(k) + '=' + esc(params[k]))
+      .map(k => esc(k))
       .join('&');
     url += '?' + query;
     console.log(url);
@@ -103,6 +104,8 @@
   })
 
   // Start by assigning values if they exist in url params
+  // Ex. https://grundfoscampaign.webflow.io/self-assessment-simple?facilityType=Hotel&chiller1=400&chiller2=300
+  // https://grundfoscampaign.webflow.io/self-assessment-simple?facilityType=Commercial%20Office
   const queryString = window.location.search;
   console.log(queryString);
   const urlParams = new URLSearchParams(queryString);
