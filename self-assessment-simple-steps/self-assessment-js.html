@@ -116,6 +116,7 @@
     fTypeOptions.forEach((elem) => {
       if (String(elem.value) === String(facilityType)) {
         elem.checked = true
+        // Set this flag to true as it was found in the url
         facilityTypeIsSet = true
         console.log('elem.value is checked')
       }
