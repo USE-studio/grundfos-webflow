@@ -68,13 +68,29 @@
     })
   }
 
+  function storeInputValuesInUrlParam() {
+    let url = 'https://grundfoscampaign.webflow.io/self-assessment-simple';
+    let params = {};
+    fTypeOptions.forEach((element) => {
+      if (element.value.length > 0)
+        params[element.id] = element.value;
+    });
+    let esc = encodeURIComponent;
+    let query = Object.keys(params)
+      .map(k => esc(k) + '=' + esc(params[k]))
+      .join('&');
+    url += '?' + query;
+    console.log(url);
+  }
+
   let dummyButton = document.createElement('div')
   dummyButton.innerHTML = 'test'
   dummyButton.style.background = 'yellow'
   dummyButton.style.padding = '20px'
   document.body.appendChild( dummyButton )
   dummyButton.addEventListener('click', (e) => {
-    alert('hey')
+    console.log('hey')
+    storeInputValuesInUrlParam();
   })
 
   // Start by assigning values if they exist in url params
