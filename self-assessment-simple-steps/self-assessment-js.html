@@ -68,9 +68,17 @@
     })
   }
 
+  // TODO: Add chillers based on how many are found in the url
+  formWrapContainerThatHostsClones.foreach( (item, index) => {
+    console.log('testing the input chiller amount')
+    console.log(item)
+  })
+  // addChiller()
+
   function storeInputValuesInUrlParam() {
     let url = 'https://grundfoscampaign.webflow.io/self-assessment-simple';
     let params = {};
+    // First loop through the facility Type inputs
     fTypeOptions.forEach((element) => {
       if (element.value.length > 0 && element.checked) {
         params[element.id] = element.value;
