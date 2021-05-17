@@ -69,7 +69,9 @@
   }
 
   let dummyButton = document.createElement('div')
-  dummyButton.innerHTML = 'testy'
+  dummyButton.innerHTML = 'test'
+  dummyButton.style.background = 'yellow'
+  dummyButton.style.padding = '20px'
   document.body.appendChild( dummyButton )
   dummyButton.addEventListener('click', (e) => {
     alert('hey')
