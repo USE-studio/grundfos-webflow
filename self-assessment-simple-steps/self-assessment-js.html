@@ -220,9 +220,9 @@
       .on('click', '.pieprogresswrapper', function () {
         console.log('stepValue: ', stepValue)
         // Is facility type set yet
-        if (!facilityTypeIsSet) {
-          return;
-        }
+        // if (!facilityTypeIsSet) {
+        //   return;
+        // }
         // Now disable the progresswrapper again until there is an input
         // disableProgressWrapper();
         // The visitor has no cooling towers
@@ -230,6 +230,10 @@
           console.log('Oh, we\'re sorry')
           HiddenLinkToNewsletter.click()
           return;
+        }
+        // Pass the chiller inputs.
+        if (stepValue === 2) {
+          console.log('step 2')
         }
         // Pass the chiller inputs.
         if (stepValue === 3) {
