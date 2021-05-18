@@ -4,9 +4,12 @@
 ## self-assessment-simple - start
 
 ### Init - start
-'stepValue': stepValue,
-'whichPage': 'self-assessment-simple-steps',
-'whichFlow': 'self-assessment-simple-steps'
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'stepValue': stepValue,
+  'whichPage': 'self-assessment-simple-steps',
+  'whichFlow': 'self-assessment-simple-steps'
+});
 ### Init - end
 
 
@@ -27,13 +30,17 @@ window.dataLayer.push({
 ### Continuous - end
 
 
-### Once - start 
+### Lastly - start 
 <!-- if stepValue === 5 and if progress button is clicked -->
 window.dataLayer.push({
   'event': 'gtm.load',
   'success': true,
   'submission': dLInputObject
 });
-### Once - end 
+### Lastly - end 
 
 ## self-assessment-simple - end
+
+
+
+
