@@ -20,7 +20,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('reworking flow and steps');
+  console.log('trying multiply');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -146,8 +146,9 @@
     // Set sessionStorage - noOfChillers
     sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
     // Set sessionStorage - averageNominalCapacity
+    console.log('trying multiply');
     if (isItInkW) {
-      let convertedAverageNominalCapacity = averageNominalCapacity / 1.6;
+      let convertedAverageNominalCapacity = averageNominalCapacity * 1.6;
       sessionStorage.setItem('averageNominalCapacity', convertedAverageNominalCapacity);
       console.log('value is in kW');
     }
