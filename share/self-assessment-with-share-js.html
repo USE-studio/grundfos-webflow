@@ -80,6 +80,83 @@
     })
   }
 
+  // TODO: - Add chillers based on how many are found in the url
+  // formWrapContainerThatHostsClones.forEach( (item, index) => {
+  //   console.log('testing the input chiller amount')
+  //   console.log(item)
+  // })
+  // addChiller()
+
+  function storeInputValuesInUrlParam() {
+    let url = 'https://grundfoscampaign.webflow.io/self-assessment-simple';
+    let params = {};
+    // First loop through the facility Type inputs
+    fTypeOptions.forEach((element) => {
+      if (element.value.length > 0 && element.checked) {
+        params[element.id] = element.value;
+      }
+    });
+    let esc = encodeURIComponent;
+    let query = Object.keys(params)
+      // .map(k => esc(k) + '=' + esc(params[k]))
+      .map(k => esc(k))
+      .join('&');
+    url += '?' + query;
+    console.log(url);
+  }
+
+  let dummyButton = document.createElement('div')
+  dummyButton.innerHTML = 'test1'
+  dummyButton.style.background = 'yellow'
+  dummyButton.style.padding = '20px'
+  document.body.appendChild( dummyButton )
+  dummyButton.addEventListener('click', (e) => {
+    console.log('hey')
+    storeInputValuesInUrlParam();
+  })
+
+  // Start by assigning values if they exist in url params
+  // Ex. https://grundfoscampaign.webflow.io/self-assessment-simple?facilityType=Hotel&chiller1=400&chiller2=300
+  // ...?facilityType=Commercial%20Office&coolingTowers=true
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  // Check if the url has facility type in it?
+  if (urlParams.get('facilityType')) {
+    const facilityType = urlParams.get('facilityType')
+    fTypeOptions.forEach((elem) => {
+      if (String(elem.value) === String(facilityType)) {
+        elem.checked = true
+        // Set this flag to true as it was found in the url
+        facilityTypeIsSet = true
+      }
+    });
+  }
+  // Check if the url has cooling towers in it
+  if (urlParams.get('coolingTowers')) {
+    const coolingTowers = urlParams.get('coolingTowers')
+    radioBtnsCoolingTowers.forEach((elem) => {
+      // console.log('elem')
+      // console.log(elem.value)
+      console.log('coolingTowers')
+      console.log( String(coolingTowers) )
+      // It says that facility has cooling towers
+      if (String(coolingTowers) === 'Yes' && String(elem.value) === 'Yes') {
+        elem.checked = true
+        console.log('has yeeeeeeees')
+        // Set this flag to true as it was found in the url
+        coolingTowerOptionIsSet = true
+      }
+      // It says that facility has no cooling towers
+      if (String(coolingTowers) === 'No' && String(elem.value) === 'No') {
+        elem.checked = true
+        console.log('has notttttttt')
+        // Set this flag to true as it was found in the url
+        coolingTowerOptionIsSet = true
+      } 
+    });
+  }
+
   // Clone btnAddInputChiller logic - start
   function addChiller() {
     // Do this only once
