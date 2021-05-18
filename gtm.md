@@ -1,6 +1,30 @@
 # dataLayer pushes
 
 
+## landingpage - start
+
+### Init - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'whichPage': 'success',
+  'which-flow': 'self-assessment-simple-steps',
+  'meetingScheduled': 'true'
+});
+### Init - end
+
+### downloadCaseStudiesBtnWasclicked - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'clickedDownloadCaseStudiesBtn': 'true'
+});
+### onDownloadCaseStudies - end
+
+## succlandingpageess - end
+
+
+
+
+
 ## self-assessment-simple - start
 
 ### Init - start
@@ -44,17 +68,60 @@ window.dataLayer.push({
 
 
 
-## simple-success - start
+## success - start
 
 ### Init - start
 window.dataLayer.push({
   'event': 'gtm.load',
-  'whichPage': 'simple-success',
-  'which-flow': 'self-assessment-simple-steps'
+  'whichPage': 'success',
+  'which-flow': 'self-assessment-simple-steps',
+  'meetingScheduled': 'true'
 });
 ### Init - end
 
-## simple-success - end
+### downloadCaseStudiesBtnWasclicked - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'downloadCaseStudiesBtnWasclicked': 'true'
+});
+### onDownloadCaseStudies - end
+
+## success - end
+
+
+
+
+
+
+
+
+
+## self-assessment-simple-newsletter - start
+
+### Init - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'stepValue': 'noCoolingTowers',
+  'whichPage': 'self-assessment-simple-newsletter'
+});
+### Init - end
+
+## self-assessment-simple-newsletter - end
+
+
+
+
+## newsletter-subscription-success - start
+
+### Init - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'whichPage': 'newsletter-subscription-success',
+  'subscribedToNewsletter': 'true'
+});
+### Init - end
+
+## newsletter-subscription-success - end
 
 
 

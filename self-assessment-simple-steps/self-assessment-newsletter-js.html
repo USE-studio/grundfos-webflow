@@ -1,19 +1,12 @@
-<!-- self-assessment-successful-subscription -->
+<!-- self-assessment-newsletter -->
 <script>
   // var Webflow = Webflow || [];
   // Put the datalayer in the window object
   window.dataLayer = window.dataLayer || [];
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
-    'whichPage': 'successful-subscription',
-    'subscribedToNewsletter': true
+    'event': 'gtm.load',
+    'stepValue': 'noCoolingTowers',
+    'whichPage': 'self-assessment-simple-newsletter'
   });
-
-  // The take me home button
-  // let takeMeHomeFromSuccessFulSubscription = document.getElementById('takeMeHomeFromSuccessFulSubscription');
-  
-  // The help icon button in the header. we need to hide it
-  let helpIconBtnInHeader = document.getElementById('helpIconBtnInHeader');
-  helpIconBtnInHeader.style.display = 'none';
-
 </script>

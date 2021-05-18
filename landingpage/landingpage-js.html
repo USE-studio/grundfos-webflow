@@ -1,6 +1,15 @@
+<!-- Carousel related -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 <script>
-  // Define Datalayer
+	// Define Datalayer
   window.dataLayer = window.dataLayer || [];
+
+  // Start by pushing some initial data layer stuff
+  window.dataLayer.push({
+    'event': 'gtm.load',
+    'whichPage': 'landingpage'
+  });
 
   // Declare calculate savings buttons
   let allCalcSavingsBtns = [];
@@ -21,19 +30,34 @@
       let id = target.getAttribute('id')
       // Start by pushing some initial data layer stuff
       window.dataLayer.push({
+        'event': 'gtm.load',
         'whichCalcSavingsBtn': id
       });
     });
   };
 
-  // Start by pushing some initial data layer stuff
-  window.dataLayer.push({
-    'whichPage': 'landingpage'
-  });
-
   downloadCaseStudiesBtn.addEventListener('click', () => {
     window.dataLayer.push({
-      'clickedDownloadCaseStudiesBtn': true
+      'event': 'gtm.load',
+      'clickedDownloadCaseStudiesBtn': 'true'
     });
+  });
+  
+  $('.projects-col-list.w-dyn-items').owlCarousel({
+    margin: 10,
+    nav: true,
+    loop: true,
+    animateIn: true,
+    singleItem: true,
+    dots: false,
+    navText: ["<div class='nav-btn prev-slide'></div>", "<div class='nav-btn next-slide'></div>"],
+    responsive: {
+      0: {
+        items: 1.5
+      },
+      600: {
+        items: 1.5
+      }
+    }
   });
 </script>
