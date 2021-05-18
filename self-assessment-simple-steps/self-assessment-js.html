@@ -53,6 +53,10 @@
   let hasCoolingTowersRadioBtn = document.querySelector('#hasCoolingTowers')
   let noCoolingTowersRadioBtn = document.querySelector('#noCoolingTowers')
 
+  // Declare email and name in order to use with sessionsStorage
+  let inputSimpleStepsEmail = document.getElementById('inputSimpleStepsEmail')
+  let inputSimpleStepsFullName = document.getElementById('inputSimpleStepsFullName')
+
   // The newsletter button
   let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter');
   // The energy saving button
@@ -128,9 +132,19 @@
     // let facilityTypeInput = 
     window.dataLayer.push({
       'event': 'gtm.load',
-      'success': 'true',
+      'stepValue': '6',
       'submission': dLInputObject
     });
+    // console.log('numberOfChillersInput: ', numberOfChillersInput)
+  }
+  // Store Input values in DL - end
+  
+  // Store Input values in DL - start
+  function storeTheEmailAndFullNameInSession() {
+    const emailValue = inputSimpleStepsEmail.innerHTML
+    const fullNameValue = inputSimpleStepsFullName.innerHTML
+    sessionStorage.setItem('submitEmail', emailValue);
+    sessionStorage.setItem('submitFullName', fullNameValue);
     // console.log('numberOfChillersInput: ', numberOfChillersInput)
   }
   // Store Input values in DL - end
@@ -238,7 +252,14 @@
           HiddenLinkToNewsletter.click()
           return;
         }
-        // Pass the chiller inputs.
+        // TODO: if logic exists send to data layer
+        if (stepValue === 1) {
+          // Push stepValue to data layer
+          window.dataLayer.push({
+            'event': 'gtm.load',
+            'copyToClipBoard': 'true'
+          });
+        }
         if (stepValue === 2) {
           console.log('step 2')
         }
@@ -257,6 +278,8 @@
           console.log('submit')
           // Before submitting store the input values in the GTM Datalayer
           storeTheInputValuesIntheDataLayer();
+          // Store the email and full name in session
+          storeTheEmailAndFullNameInSession();
           energySavingReportSubmitBtn.click();
           return;
         }

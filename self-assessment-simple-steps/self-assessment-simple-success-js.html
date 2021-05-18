@@ -13,6 +13,11 @@
     'which-flow': 'self-assessment-simple-steps'
   });
 
+  // Get email from session storage
+  let submitEmail = sessionStorage.getItem('submitEmail') ? sessionStorage.getItem('submitEmail') : '-';
+  // Get name from session storage
+  let submitFullName = sessionStorage.getItem('submitFullName') ? sessionStorage.getItem('submitFullName') : '-';
+
   // The Schedule Meeting Hidden Submit Button 
   let energySavingReportSubmitBtn = document.getElementById('scheduleMeetingHiddenSubmitButton');
 
