@@ -34,12 +34,27 @@ window.dataLayer.push({
 <!-- if stepValue === 5 and if progress button is clicked -->
 window.dataLayer.push({
   'event': 'gtm.load',
-  'success': true,
+  'stepValue': '6',
   'submission': dLInputObject
 });
 ### Lastly - end 
 
 ## self-assessment-simple - end
+
+
+
+
+## simple-success - start
+
+### Init - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'whichPage': 'simple-success',
+  'which-flow': 'self-assessment-simple-steps'
+});
+### Init - end
+
+## simple-success - end
 
 
 

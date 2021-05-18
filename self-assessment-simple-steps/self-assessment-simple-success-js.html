@@ -8,6 +8,7 @@
   window.dataLayer = window.dataLayer || [];
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
+    'event': 'gtm.load',
     'whichPage': 'simple-success',
     'which-flow': 'self-assessment-simple-steps'
   });
@@ -35,9 +36,10 @@
     // and increment the stepValue
     function moveForwardInSteps() {
       // If current step is about number of Chillers
-      if (stepValue == 1) {
+      if (stepValue === 1) {
         window.dataLayer.push({
-          'scheduledMeeting': true
+          'event': 'gtm.load',
+          'scheduledMeeting': 'true'
         });
         energySavingReportSubmitBtn.click();
         return;
@@ -46,9 +48,9 @@
       stepValue++;
       console.log('this: ', this);
       // Push stepValue to data layer
-      window.dataLayer.push({
-        'stepValue': stepValue
-      });
+      // window.dataLayer.push({
+      //   'stepValue': stepValue
+      // });
       // Org. code
       r.trigger('tap');
       // Check the progress
