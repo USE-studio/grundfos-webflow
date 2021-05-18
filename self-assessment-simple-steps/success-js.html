@@ -5,8 +5,10 @@
   window.dataLayer = window.dataLayer || [];
   // Start by pushing some initial data layer stuff
   window.dataLayer.push({
-    'whichPage': 'download-case-studies',
-    'meetingScheduled': true
+    'event': 'gtm.load',
+    'whichPage': 'success',
+    'which-flow': 'self-assessment-simple-steps',
+    'meetingScheduled': 'true'
   });
 
   // The take me home button
@@ -17,7 +19,8 @@
   btnDownloadCaseStudies.addEventListener('click', () => {
     // Start by pushing some initial data layer stuff
     window.dataLayer.push({
-      'downloadCaseStudiesBtnWasclicked': true
+      'event': 'gtm.load',
+      'downloadCaseStudiesBtnWasclicked': 'true'
     });
   })
   
