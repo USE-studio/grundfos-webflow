@@ -141,8 +141,8 @@
   
   // Store Input values in DL - start
   function storeTheEmailAndFullNameInSession() {
-    const emailValue = inputSimpleStepsEmail.innerHTML
-    const fullNameValue = inputSimpleStepsFullName.innerHTML
+    const emailValue = inputSimpleStepsEmail.value
+    const fullNameValue = inputSimpleStepsFullName.value
     sessionStorage.setItem('submitEmail', emailValue);
     sessionStorage.setItem('submitFullName', fullNameValue);
     // console.log('numberOfChillersInput: ', numberOfChillersInput)
