@@ -147,13 +147,14 @@
     sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
     // Set sessionStorage - averageNominalCapacity
     if (isItInkW) {
-      averageNominalCapacity = averageNominalCapacity * 1.6;
+      let convertedAverageNominalCapacity = averageNominalCapacity / 1.6;
+      sessionStorage.setItem('averageNominalCapacity', convertedAverageNominalCapacity);
       console.log('it is in kW');
     }
     else {
       console.log('it is in RT');
+      sessionStorage.setItem('averageNominalCapacity', averageNominalCapacity);
     }
-    sessionStorage.setItem('averageNominalCapacity', averageNominalCapacity);
   }
   // Calculate average chiller input value - end
 
