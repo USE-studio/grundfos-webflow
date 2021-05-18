@@ -29,6 +29,13 @@
     'which-flow': 'self-assessment-simple-steps'
   });
 
+  // Get share icon
+  let shareIconBtn = document.getElementById('shareIconBtn');
+  shareIconBtn.addEventListener('click', (e) => {
+    console.log('testing')
+    // window.location.href = "mailto:?subject=Self-assessment&body=Make the self-assessment here:www.caasbygrundfos.com/self-assessment-simple"
+  })
+
   // The progress pie parent
   let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
   let thePieProgress = document.querySelector('.pieprogress')
