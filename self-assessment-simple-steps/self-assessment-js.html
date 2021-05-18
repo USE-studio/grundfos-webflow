@@ -147,7 +147,7 @@
     sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
     // Set sessionStorage - averageNominalCapacity
     if (isItInkW) {
-      averageNominalCapacity = averageNominalCapacity / 1.6;
+      averageNominalCapacity = averageNominalCapacity * 1.6;
       console.log('it is in kW');
     }
     else {
