@@ -129,10 +129,10 @@
   if (urlParams.get('coolingTowers')) {
     const coolingTowers = urlParams.get('coolingTowers')
     radioBtnsCoolingTowers.forEach((elem) => {
-      console.log('elem')
-      console.log(elem.value)
+      // console.log('elem')
+      // console.log(elem.value)
       console.log('coolingTowers')
-      console.log( coolingTowers )
+      console.log( String(coolingTowers) )
       // It says that facility has cooling towers
       if (String(coolingTowers) === 'Yes' && String(elem.value) === 'Yes') {
         elem.checked = true
