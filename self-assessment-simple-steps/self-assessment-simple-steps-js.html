@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('copy to clipboard - 5.2');
+  console.log('6.0 - copyToClipboard in modal');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -51,7 +51,7 @@
   
   // forwardLinkCopyToClipBoard - copyToClipboard func related
   let forwardLinkCopyToClipBoard = document.getElementById('forwardLinkCopyToClipBoard')
-  forwardLinkCopyToClipBoard.readonly = true
+  // forwardLinkCopyToClipBoard.readonly = true
   forwardLinkCopyToClipBoard.addEventListener('click', (e) => {
     copyToClipboard()
   })
@@ -194,8 +194,8 @@
   // Copy to clipboard - start
   const copyToClipboard = str => {
 
-    var text = forwardLinkCopyToClipBoard.placeholder != '' ? forwardLinkCopyToClipBoard.placeholder : 'https://www.caasbygrundfos.com/self-assessment-simple';
-    forwardLinkCopyToClipBoard.focus();
+    var text = forwardLinkCopyToClipBoard.innerHTML != '' ? forwardLinkCopyToClipBoard.innerHTML : 'https://www.caasbygrundfos.com/self-assessment-simple';
+    // forwardLinkCopyToClipBoard.focus();
     navigator.clipboard.writeText(text).then(function() {
       console.log('Async: Copying to clipboard was successful!');
     }, function(err) {
