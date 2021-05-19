@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('7.3 - feedbackContainerFacilityType if else display none or block');
+  console.log('7.4 - hideOrShowFeedback');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -215,6 +215,16 @@
   };
   // Copy to clipboard - end
 
+  // Hide or show feedback
+  const hideOrShowFeedback = (elem, type) => {
+    if (type === 'show') {
+      elem.style.display = 'block'
+    }
+    else if (type === 'hide') {
+      elem.style.display = 'none'
+    }
+  }
+
   Webflow.push(function () {
     
     // Check where we are in the progress of self-ass. steps
@@ -298,9 +308,9 @@
           console.log('step 1')
           // Is facility type set yet?
           if (facilityTypeIsSet) {
-            feedbackContainerFacilityType.style.display = 'none'
+            hideOrShowFeedback(feedbackContainerFacilityType, 'hide')
           } else {
-            feedbackContainerFacilityType.style.display = 'block'
+            hideOrShowFeedback(feedbackContainerFacilityType, 'show')
             return;
           }
         }
@@ -362,6 +372,8 @@
       elem.addEventListener("change", function(event) {
         var item = event.target.value;
         facilityTypeIsSet = true;
+        // Remove the feedback message if there is any
+        hideOrShowFeedback(feedbackContainerFacilityType, 'hide')
         dLInputObject.facilityType = item; 
       });
     });
