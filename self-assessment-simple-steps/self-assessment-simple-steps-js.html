@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('7.2 - feedbackContainerFacilityType.style.display = block');
+  console.log('7.3 - feedbackContainerFacilityType if else display none or block');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -297,7 +297,9 @@
         if (stepValue === 1) {
           console.log('step 1')
           // Is facility type set yet?
-          if (!facilityTypeIsSet) {
+          if (facilityTypeIsSet) {
+            feedbackContainerFacilityType.style.display = 'none'
+          } else {
             feedbackContainerFacilityType.style.display = 'block'
             return;
           }
