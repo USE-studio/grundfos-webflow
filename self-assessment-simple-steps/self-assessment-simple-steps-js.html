@@ -20,7 +20,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('copy to clipboard - 2');
+  console.log('copy to clipboard - 3');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -187,7 +187,7 @@
   // Copy to clipboard - start
   const copyToClipboard = str => {
 
-    var text = "Example text to appear on clipboard";
+    var text = forwardLinkCopyToClipBoard.placeholder != '' ? forwardLinkCopyToClipBoard.placeholder : 'https://www.caasbygrundfos.com/self-assessment-simple';
     navigator.clipboard.writeText(text).then(function() {
       console.log('Async: Copying to clipboard was successful!');
     }, function(err) {
@@ -196,7 +196,7 @@
 
     // forwardLinkCopyToClipBoard.select();
     // document.execCommand('copy');
-    console.log('should copy alright - 2')
+    console.log('should copy alright - 3')
 
   };
   // Copy to clipboard - end
