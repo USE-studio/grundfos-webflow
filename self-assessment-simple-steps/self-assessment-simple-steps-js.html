@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('7.4 - hideOrShowFeedback');
+  console.log('7.5 - feedbackContainerFacilityType.style.transition = opacity 0.3s ease');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -60,6 +60,7 @@
   // Options - Facility type
   let fTypeOptions = document.querySelectorAll('.facilitytype--option')
   let feedbackContainerFacilityType = document.getElementById('FeedbackContainerFacilityType')
+  feedbackContainerFacilityType.style.transition = 'opacity 0.3s ease'
   
   // Options - Cooling towers
   // cooling towers or not - start variables
@@ -219,9 +220,15 @@
   const hideOrShowFeedback = (elem, type) => {
     if (type === 'show') {
       elem.style.display = 'block'
+      setTimeout( () => {
+        elem.style.opacity = 1
+      }, 300)
     }
     else if (type === 'hide') {
-      elem.style.display = 'none'
+      elem.style.opacity = 0
+      setTimeout( () => {
+        elem.style.display = 'none'
+      }, 300)
     }
   }
 
