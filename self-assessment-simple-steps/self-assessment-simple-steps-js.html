@@ -1,4 +1,10 @@
 <script>
+  // Step value = 0 - Start self-assessment
+  // Step value = 1 - Facility Type
+  // Step value = 2 - Cooling towers
+  // Step value = 3 - Chiller capacity
+  // Step value = 4 - Email and Name
+
   // Avoid enter submit
   $(function () {
     $(window).keydown(function (event) {
@@ -292,6 +298,7 @@
           console.log('step 2')
         }
         // Pass the chiller inputs.
+        // Step value = 3 - Chiller capacity
         if (stepValue === 3) {
           // Save data to sessionStorage. Update total number of chiller input
           chillerInputsPresentOnPage = formWrapContainerThatHostsClones.getElementsByClassName('form-wrap-chiller').length;
@@ -302,6 +309,7 @@
         }
         // If current step is send energy savings report
         // THE FORM DATA IS SUBMITTED HERE. Facility type, cooling towers, No. of chillers.
+        // Step 4 = Email and Name
         if (stepValue === 4) {
           console.log('submit')
           // Before submitting store the input values in the GTM Datalayer
