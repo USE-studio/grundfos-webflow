@@ -22,14 +22,19 @@
   let submitFullName = sessionStorage.getItem('submitFullName') ? sessionStorage.getItem('submitFullName') : '-';
 
   // The inputScheduleMeetingEmail
-  let inputScheduleMeetingEmail = document.getElementById('inputScheduleMeetingEmail');
-  // The Schedule Meeting Hidden Submit Button 
-  let inputScheduleMeetingFullName = document.getElementById('inputScheduleMeetingFullName');
+  let wrapperScheduleMeetingEmail = document.getElementById('wrapperScheduleMeetingEmail');
+  // let inputScheduleMeetingEmail = document.getElementById('inputScheduleMeetingEmail');
+  let wrapperScheduleMeetingFullName = document.getElementById('wrapperScheduleMeetingFullName');
+  // let inputScheduleMeetingFullName = document.getElementById('inputScheduleMeetingFullName');
   // Add the sessionStorage to inputs
   inputScheduleMeetingEmail.value = submitEmail
   inputScheduleMeetingFullName.value = submitFullName
-  inputScheduleMeetingEmail.style.display = 'none'
-  inputScheduleMeetingFullName.style.display = 'none'
+  // If input
+  // inputScheduleMeetingEmail.style.display = 'none'
+  // inputScheduleMeetingFullName.style.display = 'none'
+  // If parent of input
+  wrapperScheduleMeetingEmail.style.display = 'none'
+  wrapperScheduleMeetingFullName.style.display = 'none'
   // For - adding sessionStorage email and name to form - end
 
 
