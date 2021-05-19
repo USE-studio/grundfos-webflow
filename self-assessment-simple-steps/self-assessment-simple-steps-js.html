@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('6.3 - chillerInputsPresentOnPage[0].value.length');
+  console.log('6.4 - allChillerInputs');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -89,6 +89,8 @@
   let formWrapContainerThatHostsClones = document.getElementById('formWrapContainerThatHostsClones');
   // input amount / chiller amount
   let chillerAmount = 1;
+  // Array for all chiller inputs
+  let allChillerInputs = null;
   // averageNominalCapacity to be set in sessionStorage on step 5
   let averageNominalCapacity = 0;
 
@@ -308,13 +310,14 @@
         // Pass the chiller inputs.
         // Step value = 3 - Chiller capacity
         if (stepValue === 3) {
+          allChillerInputs = formWrapContainerThatHostsClones.getElementsByClassName('form-wrap-chiller');
           chillerInputsPresentOnPage = formWrapContainerThatHostsClones.getElementsByClassName('form-wrap-chiller').length;
           // Any values for chiller inputs?
           // if (chillerInputsPresentOnPage[0].value === '') {
           //   return;
           // }
-          console.log( 'chillerInputsPresentOnPage[0].value.length' )
-          console.log( chillerInputsPresentOnPage[0].value.length )
+          console.log( 'allChillerInputs[0].value.length' )
+          console.log( allChillerInputs[0].value.length )
           console.log('Input no. of chillers');
           console.log('session storage - set');
           // Save data to sessionStorage. Update total number of chiller input
