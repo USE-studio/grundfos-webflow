@@ -70,6 +70,9 @@ window.dataLayer.push({
 });
 ### Lastly - end 
 
+### Other
+forwardLinkcopiedToClipboard: "true"
+
 ## self-assessment-simple - end
 
 
