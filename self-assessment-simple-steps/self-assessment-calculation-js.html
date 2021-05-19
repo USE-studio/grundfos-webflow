@@ -1,4 +1,4 @@
-<!-- This script lets us use any component for our arrows. This way we can position freely -->
+<!-- self-assessment-calculation-js -->
 <script>
   var Webflow = Webflow || [];
   var l = $('#flowbaseSlider .w-slider-arrow-left');
@@ -13,6 +13,14 @@
     'which-flow': 'self-assessment-simple-steps',
     'calculationWasMade': 'true'
   });
+
+  // The help icon button in the header. we need to hide it
+  let helpIconBtnInHeader = document.getElementById('helpIconBtnInHeader');
+  let shareIconBtn = document.getElementById('shareIconBtn');
+  let btnIconPhone = document.getElementById('btnIconPhone');
+  helpIconBtnInHeader.style.display = 'none';
+  shareIconBtn.style.display = 'none';
+  btnIconPhone.style.display = 'none';
 
 
   // For - adding sessionStorage email and name to form - start
