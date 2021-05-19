@@ -275,10 +275,6 @@
       // The progress button
       .on('click', '.pieprogresswrapper', function () {
         console.log('stepValue: ', stepValue)
-        // Is facility type set yet
-        // if (!facilityTypeIsSet) {
-        //   return;
-        // }
         // Now disable the progresswrapper again until there is an input
         // disableProgressWrapper();
         // The visitor has no cooling towers
@@ -295,8 +291,19 @@
         //     'copyToClipBoard': 'true'
         //   });
         // }
+        if (stepValue === 1) {
+          console.log('step 1')
+          // Is facility type set yet?
+          if (!facilityTypeIsSet) {
+            return;
+          }
+        }
         if (stepValue === 2) {
           console.log('step 2')
+          // Is cooling towers yes or no set yet?
+          if (!coolingTowerOptionIsSet) {
+            return;
+          }
         }
         // Pass the chiller inputs.
         // Step value = 3 - Chiller capacity
@@ -337,11 +344,15 @@
     // When the hasCoolingTowers radio is clicked
     hasCoolingTowersRadioBtn.addEventListener('change', (e) => {
       doesHaveCoolingTowers = true
+      // cooling towers yes or no is set
+      coolingTowerOptionIsSet = true
       dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
     })
     // When the noCoolingTowers radio is clicked
     noCoolingTowersRadioBtn.addEventListener('change', (e) => {
       doesHaveCoolingTowers = false
+      // cooling towers yes or no is set
+      coolingTowerOptionIsSet = true
       dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
     })
     
