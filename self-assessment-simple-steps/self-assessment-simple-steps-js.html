@@ -188,15 +188,18 @@
   const copyToClipboard = str => {
 
     var text = forwardLinkCopyToClipBoard.placeholder != '' ? forwardLinkCopyToClipBoard.placeholder : 'https://www.caasbygrundfos.com/self-assessment-simple';
+    forwardLinkCopyToClipBoard.select();
     navigator.clipboard.writeText(text).then(function() {
       console.log('Async: Copying to clipboard was successful!');
     }, function(err) {
       console.error('Async: Could not copy text: ', err);
     });
 
-    // forwardLinkCopyToClipBoard.select();
-    // document.execCommand('copy');
-    console.log('should copy alright - 3')
+    // Tell Data Layer that copy to clipboard was clicked
+    window.dataLayer.push({
+      'event': 'gtm.load',
+      'forwardLinkcopiedToClipboard': 'true'
+    });
 
   };
   // Copy to clipboard - end
