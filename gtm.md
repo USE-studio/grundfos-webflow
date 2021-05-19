@@ -78,6 +78,17 @@ forwardLinkcopiedToClipboard: "true"
 
 
 
+## calculation - start
+window.dataLayer.push({
+  whichPage: "self-assessment-calculation",
+  which-flow: "self-assessment-simple-steps",
+  calculationWasMade: "true"
+})
+## calculation - end
+
+
+
+
 ## success - start
 
 ### Init - start
@@ -97,6 +108,8 @@ window.dataLayer.push({
 ### onDownloadCaseStudies - end
 
 ## success - end
+
+
 
 
 

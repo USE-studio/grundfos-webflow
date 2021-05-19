@@ -292,7 +292,7 @@
           console.log('step 2')
         }
         // Pass the chiller inputs.
-        if (stepValue === 4) {
+        if (stepValue === 3) {
           // Save data to sessionStorage. Update total number of chiller input
           chillerInputsPresentOnPage = formWrapContainerThatHostsClones.getElementsByClassName('form-wrap-chiller').length;
           console.log('Input no. of chillers');
@@ -302,7 +302,7 @@
         }
         // If current step is send energy savings report
         // THE FORM DATA IS SUBMITTED HERE. Facility type, cooling towers, No. of chillers.
-        if (stepValue === 5) {
+        if (stepValue === 4) {
           console.log('submit')
           // Before submitting store the input values in the GTM Datalayer
           storeTheInputValuesIntheDataLayer();
