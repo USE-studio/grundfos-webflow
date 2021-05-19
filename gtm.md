@@ -12,6 +12,13 @@ window.dataLayer.push({
 });
 ### Init - end
 
+### which calc button - start
+window.dataLayer.push({
+  'event': 'gtm.load',
+  'whichCalcSavingsBtn': id
+});
+### which calc button - end
+
 ### downloadCaseStudiesBtnWasclicked - start
 window.dataLayer.push({
   'event': 'gtm.load',
