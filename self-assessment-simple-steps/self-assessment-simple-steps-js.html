@@ -51,8 +51,9 @@
   
   // forwardLinkCopyToClipBoard - copyToClipboard func related
   let forwardLinkCopyToClipBoard = document.getElementById('forwardLinkCopyToClipBoard')
+  let btnCopyLinkToClipBoardTrigger = document.getElementById('BtnCopyLinkToClipBoardTrigger')
   // forwardLinkCopyToClipBoard.readonly = true
-  forwardLinkCopyToClipBoard.addEventListener('click', (e) => {
+  btnCopyLinkToClipBoardTrigger.addEventListener('click', (e) => {
     copyToClipboard()
   })
 
