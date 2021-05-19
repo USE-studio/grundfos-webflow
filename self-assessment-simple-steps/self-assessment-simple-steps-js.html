@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('6.8 - If any of the input values are empty then return');
+  console.log('7.0 - trying feedback in chiller input');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Start by pushing some initial data layer stuff
@@ -321,7 +321,10 @@
           for (let i = 0; i < allChillerInputs.length; i++) {
             console.log(allChillerInputs[i].value)
             // If any of the input values are '' then return
+            allChillerInputs[i].style.border = '1.3px solid #bec9d5'
             if (allChillerInputs[i].value === '') {
+              allChillerInputs[i].placeholder = 'Please input a valid value'
+              allChillerInputs[i].style.border = '1.3px ​solid #ea5858'
               return
             }
           }
