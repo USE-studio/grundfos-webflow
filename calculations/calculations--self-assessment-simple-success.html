@@ -8,9 +8,9 @@
   let bbpSavingTarget = 0.75 // H7 – BBP saving target [kW/RT]
   let bbpMinimumSavingCost = 100000 // H8 - This is the cost of the BBP/CaaS installation. BBP minimum saving cost [USD/year].
   let baselineElectricPrice = 0.106 // H9 - For now this is the Thailand average electricity price. Baseline electric price [USD/kWh].
-  let baselineAverageChillerPlantLoad = 1; // H9 - Baseline average chiller plant load [%]. Baseline chiller plant load. For hotels this is typically 1/3 to 1/2, meaning if 6 chillers are installed normally only 2 or 3 chillers are operating. This factor ensures that the energy calculations are taking this into account.
+  let baselineAverageChillerPlantLoad = 0.35; // H9 - Baseline average chiller plant load [%]. Baseline chiller plant load. For hotels this is typically 1/3 to 1/2, meaning if 6 chillers are installed normally only 2 or 3 chillers are operating. This factor ensures that the energy calculations are taking this into account.
   let estimatedChillerCapacityLoss = 0.15; // H11 - Loss due to incorrect flow in chiller, meaning cooling capacity is lost (RT). Estimated chiller capacity loss [%]
-  let baselineCO2 = 0.68; // H12 - Malaysia. How many kg of CO2 is produced when 1 kWh of electricity is generated. Baseline CO2 [kg CO2/kWh]
+  let baselineCO2 = 0.554; // 0.68, H12 - Malaysia. How many kg of CO2 is produced when 1 kWh of electricity is generated. Baseline CO2 [kg CO2/kWh]
   let pumpDesignOverCapacity = 0.2; // H13 - Pump design over capacity [%]. As only pump nameplate information is used for the pump energy concumption, it is assumed when a pump is designed for a system, the pump is designed with a 20% over capacity factor. This factor ensures to reduce the energy concumption written on the nameplate.
   
   // Chillers
