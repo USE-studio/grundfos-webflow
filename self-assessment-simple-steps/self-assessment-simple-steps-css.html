@@ -241,9 +241,13 @@ Hide because we proxy the submit via the pieprogress btn
 /* copy to clipboard */
 #forwardLinkCopyToClipBoard {
   border: none;
+  transition: background 0.75s ease;
 }
 #forwardLinkCopyToClipBoard::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #0068B4;
   opacity: 1; /* Firefox */
+}
+#forwardLinkCopyToClipBoard:focus {
+  background: #d0d0d0;
 }
 </style>
