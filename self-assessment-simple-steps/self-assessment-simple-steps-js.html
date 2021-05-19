@@ -318,10 +318,10 @@
           // }
           console.log( 'allChillerInputs[0].value.length' )
           console.log( allChillerInputs[0].value.length )
-          allChillerInputs.forEach((inp) => {
-            console.log(inp.value)
+          for (let i = 0; i < allChillerInputs.length; i++) {
+            console.log(allChillerInputs[i].value)
           });
-          
+
           console.log('Input no. of chillers');
           console.log('session storage - set');
           // Save data to sessionStorage. Update total number of chiller input
