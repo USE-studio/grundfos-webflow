@@ -27,8 +27,10 @@
     if (landingpageOrigin.includes('start')) {
       // console.log('it is coming from start')
       // homeLinks[h].href = '/start'
-      homeLinks[h].addEventListener('click', () => {
+      homeLinks[h].addEventListener('click', (e) => {
         console.log('yeah, its a starter')
+        e.preventDefault()
+        e.stopPropagation()
         window.location.href = '/start'
       })
     }

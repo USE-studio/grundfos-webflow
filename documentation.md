@@ -151,6 +151,18 @@ window.dataLayer.push({
 
 
 
+## Features
+
+### LinkReferrer
+LinkReferrer makes sure that if a visitor started out on landing page 1 they will remain in this domain when they click home buttons and links to the landing page 
+
+
+
+
+
+
+
+
 
 
 

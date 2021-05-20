@@ -181,6 +181,8 @@
       sumChillerValues += parseInt(inputValue);
       console.log('inputValue');
       console.log(inputValue);
+      // Add to dataLayer submission array
+      dLInputObject.chillerValues.push( parseInt(inputValue) )
     }
     // Set the average value that will be set as 
     averageNominalCapacity = sumChillerValues / objectOfClonesInput.length;
