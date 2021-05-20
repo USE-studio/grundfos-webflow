@@ -5,6 +5,7 @@
   experience that the home link in the HeaderStd bar leads back to the right origin
 -->
 <script>
+  console.log('1a - trying new logic start referrer')
   // For links that need to point to a different location
   let landingpageOrigin = ''
   // Get the home link in the HeaderStd
@@ -24,8 +25,12 @@
   // Check if we came from /start and therefore need to change home link to this
   for (let h = 0; h < homeLinks.length; h++) {
     if (landingpageOrigin.includes('start')) {
-      console.log('it is coming from start')
-      homeLinks[h].href = '/start'
+      // console.log('it is coming from start')
+      // homeLinks[h].href = '/start'
+      homeLinks[h].addEventListener('click', () => {
+        console.log('yeah, its a starter')
+        window.location.href = '/start'
+      })
     }
   }
 </script>
