@@ -59,6 +59,7 @@
 
   // Options - Facility type
   let fTypeOptions = document.querySelectorAll('.facilitytype--option')
+  // Feedback
   let feedbackContainerFacilityType = document.getElementById('FeedbackContainerFacilityType')
   feedbackContainerFacilityType.style.transition = 'opacity 0.3s ease'
   
@@ -69,6 +70,9 @@
   // The radio button for having cooling towers or not
   let hasCoolingTowersRadioBtn = document.querySelector('#hasCoolingTowers')
   let noCoolingTowersRadioBtn = document.querySelector('#noCoolingTowers')
+  // Feedback
+  let feedbackContainerCoolingTowers = document.getElementById('FeedbackContainerCoolingTowers')
+  feedbackContainerCoolingTowers.style.transition = 'opacity 0.3s ease'
 
   // Declare email and name in order to use with sessionsStorage
   let inputSimpleStepsEmail = document.getElementById('inputSimpleStepsEmail')
@@ -324,7 +328,10 @@
         if (stepValue === 2) {
           console.log('step 2')
           // Is cooling towers yes or no set yet?
-          if (!coolingTowerOptionIsSet) {
+          if (coolingTowerOptionIsSet) {
+            hideOrShowFeedback(feedbackContainerCoolingTowers, 'hide')
+          } else {
+            hideOrShowFeedback(feedbackContainerCoolingTowers, 'show')
             return;
           }
         }
@@ -390,6 +397,8 @@
       // cooling towers yes or no is set
       coolingTowerOptionIsSet = true
       dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
+      // Remove the feedback message if there is any
+      hideOrShowFeedback(feedbackContainerCoolingTowers, 'hide')
     })
     // When the noCoolingTowers radio is clicked
     noCoolingTowersRadioBtn.addEventListener('change', (e) => {
@@ -397,6 +406,8 @@
       // cooling towers yes or no is set
       coolingTowerOptionIsSet = true
       dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
+      // Remove the feedback message if there is any
+      hideOrShowFeedback(feedbackContainerCoolingTowers, 'hide')
     })
     
   });
