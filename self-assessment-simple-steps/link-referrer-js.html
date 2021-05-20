@@ -1,0 +1,15 @@
+<!-- link-referrer-js -->
+<script>
+  // For links that need to point to a different location
+  // Get the home link in the HeaderStd
+  let theHomeLink = document.getElementById('homeLinkInHeader') 
+  // Get document referrer
+  let thePlaceFromWhenceYouCame = document.referrer
+  console.log('The place from whence you came')
+  console.log(thePlaceFromWhenceYouCame)
+  // Check if we came from /start and therefore need to change home link to this
+  if (thePlaceFromWhenceYouCame.includes('start')) {
+    console.log('it is coming from start')
+    theHomeLink.href = '/start'
+  }
+</script>
