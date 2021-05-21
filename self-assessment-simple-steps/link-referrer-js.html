@@ -5,7 +5,7 @@
   experience that the home link in the HeaderStd bar leads back to the right origin
 -->
 <script>
-  console.log('1a - trying new logic start referrer')
+  console.log('1b - trying new logic start referrer')
   // For links that need to point to a different location
   let landingpageOrigin = ''
   // Get the home link in the HeaderStd
@@ -31,7 +31,7 @@
         console.log('yeah, its a starter')
         e.preventDefault()
         e.stopPropagation()
-        window.location.href = '/start'
+        window.location.href = 'https://www.caasbygrundfos.com/start'
       })
     }
   }

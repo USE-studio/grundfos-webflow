@@ -161,6 +161,9 @@ textarea.area.field.w-input::-webkit-scrollbar-corner {
   cursor: not-allowed;
   pointer-events: none;
 }
+.pieprogresswrapper {
+  pointer-events: none;
+}
 .pieprogress {
   position: relative;
   width: 100px;
@@ -170,6 +173,7 @@ textarea.area.field.w-input::-webkit-scrollbar-corner {
   transform: translateY(40px);
   transition: all 0.35s ease !important;
   opacity: 0;
+  pointer-events: all;
 }
 .pieprogress.pieprogress--revealed {
   transform: translateY(0px);
