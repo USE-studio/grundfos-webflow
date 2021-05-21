@@ -26,7 +26,7 @@
   let coolingTowerOptionIsSet = false;
   
   // Define Datalayer
-  console.log('8.0 - Make an array for all chiller values to be submitted for dataLayer');
+  console.log('8.1 - Before moving click from .pieprogresswrapper to .pieprogress');
   window.dataLayer = window.dataLayer || [];
   let dLInputObject = {};
   // Make an array for all chiller values to be submitted for dataLayer
@@ -301,7 +301,7 @@
         checkProgress();
       })
       // The progress button
-      .on('click', '.pieprogresswrapper', function () {
+      .on('click', '.pieprogress', function () {
         console.log('stepValue forward: ', stepValue)
         // Now disable the progresswrapper again until there is an input
         // disableProgressWrapper();
