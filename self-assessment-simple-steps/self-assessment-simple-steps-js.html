@@ -83,7 +83,8 @@
   let wrapperAllChillers = document.getElementById('wrapperAllChillers');
   let inputAllChillers = document.getElementById('inputAllChillers');
   wrapperAllChillers.style.display = 'none'
-  inputAllChillers.value = '100, 100, 100'
+  let allChillersString = ''
+  // inputAllChillers.value = '100, 100, 100'
 
   // The newsletter button
   let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter');
@@ -190,7 +191,21 @@
       console.log(inputValue);
       // Add to dataLayer submission array
       dLInputObject.chillerValues.push( parseInt(inputValue) )
+      // First we add each chiller value to a comma seperated string allChillersString
+      let chillerCommaPair = ''
+      // If it is not the end item of the array, seperate with a comma
+      if (i != parseInt(objectOfClonesInput.length)) {
+        chillerCommaPair = parseInt(inputValue) + ', '
+      }
+      // If it is the end item of the array just add the inputValue
+      else {
+        chillerCommaPair = parseInt(inputValue)
+      }
+      allChillersString += chillerCommaPair
     }
+    // Then we add this comma seperated string to the array input allChillers
+    inputAllChillers.value = allChillersString
+
     // Set the average value that will be set as 
     averageNominalCapacity = sumChillerValues / objectOfClonesInput.length;
     // Set sessionStorage - noOfChillers
