@@ -1,0 +1,64 @@
+<!-- Carousel related -->
+<script id=“CookieDeclaration” src=“https://consent.cookiebot.com/352531a8-369e-48c7-918d-a3f22309ef41/cd.js” type=“text/javascript” async></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+	// Define Datalayer
+  window.dataLayer = window.dataLayer || [];
+
+  // Start by pushing some initial data layer stuff
+  window.dataLayer.push({
+    'event': 'gtm.load',
+    'whichPage': 'landingpage-start'
+  });
+
+  // Declare calculate savings buttons
+  let allCalcSavingsBtns = [];
+  let calcSavingsBtnHeader = document.getElementById('calcSavingsBtnHeader');
+  let calcSavingsBtnHero = document.getElementById('calcSavingsBtnHero');
+  let calcSavingsBtnFixedInBottom = document.getElementById('calcSavingsBtnFixedInBottom');
+  allCalcSavingsBtns.push(calcSavingsBtnHeader)
+  allCalcSavingsBtns.push(calcSavingsBtnHero)
+  allCalcSavingsBtns.push(calcSavingsBtnFixedInBottom)
+  
+  // Declare download case studies btn
+  let downloadCaseStudiesBtn = document.getElementById('downloadCaseStudiesBtn');
+
+  let aCSB = allCalcSavingsBtns;
+  for (let i = 0; i < aCSB.length; i++) {
+    aCSB[i].addEventListener('click', (e) => {
+      let target = e.target || e.srcElement;
+      let id = target.getAttribute('id')
+      // Start by pushing some initial data layer stuff
+      window.dataLayer.push({
+        'event': 'gtm.load',
+        'whichCalcSavingsBtn': id
+      });
+    });
+  };
+
+  downloadCaseStudiesBtn.addEventListener('click', () => {
+    window.dataLayer.push({
+      'event': 'gtm.load',
+      'clickedDownloadCaseStudiesBtn': 'true'
+    });
+  });
+  
+  $('.projects-col-list.w-dyn-items').owlCarousel({
+    margin: 10,
+    nav: true,
+    loop: true,
+    animateIn: true,
+    singleItem: true,
+    dots: false,
+    navText: ["<div class='nav-btn prev-slide'></div>", "<div class='nav-btn next-slide'></div>"],
+    responsive: {
+      0: {
+        items: 1.5
+      },
+      600: {
+        items: 1.5
+      }
+    }
+  });
+</script>
