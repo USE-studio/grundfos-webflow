@@ -1,0 +1,445 @@
+<script>
+  // Step value = 0 - Start self-assessment
+  // Step value = 1 - Facility Type
+  // Step value = 2 - Cooling towers
+  // Step value = 3 - Chiller capacity
+  // Step value = 4 - Email and Name
+
+  // Avoid enter submit
+  $(function () {
+    $(window).keydown(function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  })
+  var Webflow = Webflow || []; // Define webflow
+  var l = $('#flowbaseSlider .w-slider-arrow-left'); // back arrow btn
+  var r = $('#flowbaseSlider .w-slider-arrow-right'); // forward arrow btn
+  let stepValue = 0; 
+  // The current chillerInputsPresentOnPage
+  let sumChillerValues = 0;
+  let chillerInputsPresentOnPage = 1; // 1 by default is present
+  let averageValue = 0;
+  let facilityTypeIsSet = false;
+  let coolingTowerOptionIsSet = false;
+  
+  // Define Datalayer
+  console.log('9.1 - Adding in Chiller units input');
+  window.dataLayer = window.dataLayer || [];
+  let dLInputObject = {};
+  // Make an array for all chiller values to be submitted for dataLayer
+  dLInputObject.chillerValues = []
+  // Start by pushing some initial data layer stuff
+  window.dataLayer.push({
+    'event': 'gtm.load',
+    'stepValue': stepValue,
+    'whichPage': 'self-assessment-simple-steps',
+    'whichFlow': 'self-assessment-simple-steps'
+  });
+
+  // Get share icon
+  let shareIconBtn = document.getElementById('shareIconBtn');
+  shareIconBtn.addEventListener('click', (e) => {
+    console.log('testing')
+    // window.location.href = "mailto:?subject=Self-assessment&body=Make the self-assessment here:www.caasbygrundfos.com/self-assessment-simple"
+  })
+
+  // In order of appearance
+  // The progress pie parent
+  let thePieProgressWrapper = document.querySelector('.pieprogresswrapper')
+  let thePieProgress = document.querySelector('.pieprogress')
+  
+  // forwardLinkCopyToClipBoard - copyToClipboard func related
+  let forwardLinkCopyToClipBoard = document.getElementById('forwardLinkCopyToClipBoard')
+  let btnCopyLinkToClipBoardTrigger = document.getElementById('BtnCopyLinkToClipBoardTrigger')
+  // forwardLinkCopyToClipBoard.readonly = true
+  btnCopyLinkToClipBoardTrigger.addEventListener('click', (e) => {
+    copyToClipboard()
+  })
+
+  // Options - Facility type
+  let fTypeOptions = document.querySelectorAll('.facilitytype--option')
+  // Feedback
+  let feedbackContainerFacilityType = document.getElementById('FeedbackContainerFacilityType')
+  feedbackContainerFacilityType.style.transition = 'opacity 0.3s ease'
+  
+  // Options - Cooling towers
+  // cooling towers or not - start variables
+  let radioBtnsCoolingTowers = document.querySelectorAll('.option--hascoolingtowers')
+  let doesHaveCoolingTowers = true;
+  // The radio button for having cooling towers or not
+  let hasCoolingTowersRadioBtn = document.querySelector('#hasCoolingTowers')
+  let noCoolingTowersRadioBtn = document.querySelector('#noCoolingTowers')
+  // Feedback
+  let feedbackContainerCoolingTowers = document.getElementById('FeedbackContainerCoolingTowers')
+  feedbackContainerCoolingTowers.style.transition = 'opacity 0.3s ease'
+
+  // Declare email and name in order to use with sessionsStorage
+  let inputSimpleStepsEmail = document.getElementById('inputSimpleStepsEmail')
+  let inputSimpleStepsFullName = document.getElementById('inputSimpleStepsFullName')
+  // The input wrapper for all chillers
+  let wrapperAllChillers = document.getElementById('wrapperAllChillers');
+  let inputAllChillers = document.getElementById('inputAllChillers');
+  wrapperAllChillers.style.display = 'none'
+  let allChillersString = ''
+  let wrapperChillerUnits = document.getElementById('wrapperChillerUnits');
+  let inputChillerUnits = document.getElementById('inputChillerUnits');
+  wrapperChillerUnits.style.display = 'none'
+  // inputAllChillers.value = '100, 100, 100'
+
+  // The newsletter button
+  let HiddenLinkToNewsletter = document.querySelector('.hiddenlinktonewsletter');
+  // The energy saving button
+  let energySavingReportSubmitBtn = document.getElementById('energySavingReportSubmitBtn');
+
+  // For adding inputs - start variables
+  let btnAddInputChiller = document.getElementById('btnAddInputChiller');
+  // formWrapToBeCloned
+  let formWrapToBeCloned = document.getElementById('formWrapToBeCloned');
+  let objectOfClonesInput = [];
+  // Add the clone org to the array of inputs
+  objectOfClonesInput.push( formWrapToBeCloned.getElementsByTagName('input')[0] );
+  // formContentToBeAddedTo
+  // let formContentToBeAddedTo = document.getElementById('formContentToBeAddedTo')
+  let formWrapContainerThatHostsClones = document.getElementById('formWrapContainerThatHostsClones');
+  // input amount / chiller amount
+  let chillerAmount = 1;
+  // Array for all chiller inputs
+  let allChillerInputs = null;
+  // averageNominalCapacity to be set in sessionStorage on step 5
+  let averageNominalCapacity = 0;
+
+  // Get all radio button
+  let allinputs = document.querySelectorAll('[has-input-power-to-enable]');
+  for (let i = 0; i < allinputs.length; i++) {
+    // console.log(allinputs[i]);
+    allinputs[i].addEventListener('click', (e) => {
+      thePieProgressWrapper.classList.remove('pieprogresswrapper--disabled');
+    })
+  }
+
+  // Clone btnAddInputChiller logic - start
+  function addChiller() {
+    // Do this only once
+    // if (objectOfClonesInput.length === 0) {
+    //   // Add the clone org to the array of inputs
+    //   objectOfClonesInput.push( formWrapToBeCloned.getElementsByTagName('input')[0] );
+    // }
+    // console.log('cloning formwrap')
+    // Increase the chiller value;
+    chillerAmount++;
+    // Copy the form-wrap w/ input element and its child nodes
+    var clonedFormWrap = formWrapToBeCloned.cloneNode(true);
+    clonedFormWrap.id = `formWrapClone-${chillerAmount}`
+    // Get the input child of the one just cloned
+    var theNewBornInput = clonedFormWrap.getElementsByTagName('input')[0];
+    var theNewBornInputLabel = clonedFormWrap.getElementsByTagName('label')[0];
+    theNewBornInputLabel.innerHTML = `Chiller ${chillerAmount}`;
+    // Set the attributes of this new input
+    theNewBornInput.setAttribute('name', `Chiller-${chillerAmount}`);
+    theNewBornInput.setAttribute('data-name', `Chiller ${chillerAmount}`)
+    theNewBornInput.setAttribute('id', `Chiller-${chillerAmount}`)
+    theNewBornInput.setAttribute('has-input-power-to-enable', 1)
+    theNewBornInput.placeholder = 'Input number in kW or RT';
+    // theNewBornInput.value = 0;
+    // Add the clone to the array of inputs
+    objectOfClonesInput.push( theNewBornInput );
+    console.log('objectOfClonesInput')
+    console.log(objectOfClonesInput)
+    // Append the cloned <li> element to <ul> with id="myList1"
+    formWrapContainerThatHostsClones.appendChild(clonedFormWrap);
+    // calculateAverageChillerInputValue();
+  }
+
+  btnAddInputChiller.addEventListener('click', () => {
+    addChiller();
+  })
+  // Setup btnAddInputChiller logic - end
+  
+  // Store Input values in DL - start
+  function storeTheInputValuesIntheDataLayer() {
+    // update total number of chiller input
+    chillerInputsPresentOnPage = formWrapContainerThatHostsClones.getElementsByClassName('form-wrap-chiller').length;
+    dLInputObject.noOfChillers = chillerInputsPresentOnPage;
+    // let facilityTypeInput = 
+    window.dataLayer.push({
+      'event': 'gtm.load',
+      'stepValue': String(stepValue),
+      'submission': dLInputObject
+    });
+    // console.log('numberOfChillersInput: ', numberOfChillersInput)
+  }
+  // Store Input values in DL - end
+  
+  // Store Input values in DL - start
+  function storeTheEmailAndFullNameInSession() {
+    const emailValue = inputSimpleStepsEmail.value
+    const fullNameValue = inputSimpleStepsFullName.value
+    sessionStorage.setItem('submitEmail', emailValue);
+    sessionStorage.setItem('submitFullName', fullNameValue);
+    // console.log('numberOfChillersInput: ', numberOfChillersInput)
+  }
+  // Store Input values in DL - end
+  
+  // Calculate average chiller input value - start
+  function calculateAverageChillerInputValue() {
+    // TODO: sum of all input values / chillerInputsPresentOnPage
+    sumChillerValues = 0;
+    for (let i = 0; i < objectOfClonesInput.length; i++) {
+      let inputValue = parseInt(objectOfClonesInput[i].value)
+      sumChillerValues += parseInt(inputValue);
+      console.log('inputValue');
+      console.log(inputValue);
+      // Comma-seperation logic for adding chiller inputs to array field - start
+      // Add to dataLayer submission array
+      dLInputObject.chillerValues.push( parseInt(inputValue) )
+      // First we add each chiller value to a comma seperated string allChillersString
+      let chillerCommaPair = ''
+      // If it is not the end item of the array, seperate with a comma
+      if (i != (parseInt(objectOfClonesInput.length) - 1)) {
+        chillerCommaPair = parseInt(inputValue) + ', '
+      }
+      // If it is the end item of the array just add the inputValue
+      else {
+        chillerCommaPair = parseInt(inputValue)
+      }
+      allChillersString += chillerCommaPair
+    }
+    // Then we add this comma seperated string to the array input allChillers
+    inputAllChillers.value = allChillersString
+    // Comma-seperation logic for adding chiller inputs to array field - end
+
+    // Set the average value that will be set as 
+    averageNominalCapacity = sumChillerValues / objectOfClonesInput.length;
+    // Set sessionStorage - noOfChillers
+    sessionStorage.setItem('noOfChillersValue', chillerInputsPresentOnPage);
+    // Set sessionStorage - averageNominalCapacity
+    console.log('trying multiply');
+    if (isItInkW) {
+      let convertedAverageNominalCapacity = averageNominalCapacity * 1.6;
+      sessionStorage.setItem('averageNominalCapacity', convertedAverageNominalCapacity);
+      console.log('value is in kW');
+      inputChillerUnits.value = 'kW'
+    }
+    else {
+      console.log('value is in RT');
+      sessionStorage.setItem('averageNominalCapacity', averageNominalCapacity);
+      inputChillerUnits.value = 'RT'
+    }
+  }
+  // Calculate average chiller input value - end
+  
+  // Copy to clipboard - start
+  const copyToClipboard = str => {
+
+    var text = forwardLinkCopyToClipBoard.innerHTML != '' ? forwardLinkCopyToClipBoard.innerHTML : 'https://www.caasbygrundfos.com/self-assessment-simple';
+    // forwardLinkCopyToClipBoard.focus();
+    navigator.clipboard.writeText(text).then(function() {
+      console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+      console.error('Async: Could not copy text: ', err);
+    });
+
+    // Tell Data Layer that copy to clipboard was clicked
+    window.dataLayer.push({
+      'event': 'gtm.load',
+      'forwardLinkcopiedToClipboard': 'true'
+    });
+
+  };
+  // Copy to clipboard - end
+
+  // Hide or show feedback
+  const hideOrShowFeedback = (elem, type) => {
+    if (type === 'show') {
+      elem.style.display = 'block'
+      setTimeout( () => {
+        elem.style.opacity = 1
+      }, 300)
+    }
+    else if (type === 'hide') {
+      elem.style.opacity = 0
+      setTimeout( () => {
+        elem.style.display = 'none'
+      }, 300)
+    }
+  }
+
+  Webflow.push(function () {
+    
+    // Check where we are in the progress of self-ass. steps
+    function checkProgress() {
+      // console.log('checkProgress stepValue: ', stepValue)
+      if (stepValue == 0) {
+        // console.log('is 0')
+      }
+      if (stepValue == 1 && stepValue < 2) {
+        thePieProgress.classList.add('pieprogress--revealed')
+        thePieProgress.classList.add('step-one')
+      }
+      else if (stepValue == 2 && stepValue < 3) {
+        // console.log('is 2')
+        thePieProgress.classList.add('step-two')
+      }
+      else if (stepValue == 3 && stepValue < 4) {
+        // console.log('is 3')
+        thePieProgress.classList.add('step-three')
+      }
+      else if (stepValue == 4 && stepValue < 5) {
+        thePieProgress.classList.add('step-four')
+      }
+    }
+
+    // This is called whenever we need to progress one step
+    // and increment the stepValue
+    function moveForwardInSteps() {
+      // Increment the step value
+      stepValue++;
+      // console.log('this: ', this);
+      // console.log('stepValue increase: ', stepValue);
+      // Push stepValue to data layer
+      window.dataLayer.push({
+        'event': 'gtm.load',
+        'stepValue': stepValue
+      });
+      // Org. code
+      r.trigger('tap');
+      // Check the progress
+      checkProgress();
+    }
+
+    // The flow slider parent
+    $('#flowbaseSlider')
+      // This sends the user back
+      .on('click', '.slider-left', function () {
+        // Decrement the step value
+        stepValue--;
+        console.log('go back: ', stepValue);
+        // Push stepValue to data layer
+        window.dataLayer.push({
+          'event': 'gtm.load',
+          'stepValue': stepValue
+        });
+        // Org. code
+        l.trigger('tap');
+        // Check the progress
+        checkProgress();
+      })
+      // The progress button
+      .on('click', '.pieprogress', function () {
+        console.log('stepValue forward: ', stepValue)
+        // Now disable the progresswrapper again until there is an input
+        // disableProgressWrapper();
+        // The visitor has no cooling towers
+        if (!doesHaveCoolingTowers) {
+          console.log('Oh, we\'re sorry')
+          HiddenLinkToNewsletter.click()
+          return;
+        }
+        // TODO: if logic exists send to data layer
+        // if (stepValue === 1) {
+        //   // Push stepValue to data layer
+        //   window.dataLayer.push({
+        //     'event': 'gtm.load',
+        //     'copyToClipBoard': 'true'
+        //   });
+        // }
+        if (stepValue === 1) {
+          console.log('step 1')
+          // Is facility type set yet?
+          if (facilityTypeIsSet) {
+            hideOrShowFeedback(feedbackContainerFacilityType, 'hide')
+          } else {
+            hideOrShowFeedback(feedbackContainerFacilityType, 'show')
+            return;
+          }
+        }
+        if (stepValue === 2) {
+          console.log('step 2')
+          // Is cooling towers yes or no set yet?
+          if (coolingTowerOptionIsSet) {
+            hideOrShowFeedback(feedbackContainerCoolingTowers, 'hide')
+          } else {
+            hideOrShowFeedback(feedbackContainerCoolingTowers, 'show')
+            return;
+          }
+        }
+        // Pass the chiller inputs.
+        // Step value = 3 - Chiller capacity
+        if (stepValue === 3) {
+          allChillerInputs = formWrapContainerThatHostsClones.getElementsByClassName('inputfieldchillervalue');
+          chillerInputsPresentOnPage = formWrapContainerThatHostsClones.getElementsByClassName('form-wrap-chiller').length;
+          // Any values for chiller inputs?
+          // if (chillerInputsPresentOnPage[0].value === '') {
+          //   return;
+          // }
+          console.log( 'allChillerInputs[0].value.length' )
+          console.log( allChillerInputs[0].value.length )
+          for (let i = 0; i < allChillerInputs.length; i++) {
+            console.log(allChillerInputs[i].value)
+            // If any of the input values are '' then return
+            allChillerInputs[i].style.border = '1.3px solid #bec9d5'
+            if (allChillerInputs[i].value === '') {
+              allChillerInputs[i].placeholder = 'Please input a valid value'
+              allChillerInputs[i].style.border = '2px ​solid #ea5858 !important'
+              return
+            }
+          }
+
+          console.log('Input no. of chillers');
+          console.log('session storage - set');
+          // Save data to sessionStorage. Update total number of chiller input
+          calculateAverageChillerInputValue();
+          // calculateAverageChillerInputValue();
+        }
+        // If current step is send energy savings report
+        // THE FORM DATA IS SUBMITTED HERE. Facility type, cooling towers, No. of chillers.
+        // Step 4 = Email and Name
+        if (stepValue === 4) {
+          console.log('submit')
+          // Before submitting store the input values in the GTM Datalayer
+          storeTheInputValuesIntheDataLayer();
+          // Store the email and full name in session
+          storeTheEmailAndFullNameInSession();
+          energySavingReportSubmitBtn.click();
+          return;
+        }
+        moveForwardInSteps();
+      })
+      // The normal button
+      .on('click', '.slider-right', function () {
+        moveForwardInSteps();
+      });
+
+    fTypeOptions.forEach((elem) => {
+      elem.addEventListener("change", function(event) {
+        var item = event.target.value;
+        facilityTypeIsSet = true;
+        // Remove the feedback message if there is any
+        hideOrShowFeedback(feedbackContainerFacilityType, 'hide')
+        dLInputObject.facilityType = item; 
+      });
+    });
+    // When the hasCoolingTowers radio is clicked
+    hasCoolingTowersRadioBtn.addEventListener('change', (e) => {
+      doesHaveCoolingTowers = true
+      // cooling towers yes or no is set
+      coolingTowerOptionIsSet = true
+      dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
+      // Remove the feedback message if there is any
+      hideOrShowFeedback(feedbackContainerCoolingTowers, 'hide')
+    })
+    // When the noCoolingTowers radio is clicked
+    noCoolingTowersRadioBtn.addEventListener('change', (e) => {
+      doesHaveCoolingTowers = false
+      // cooling towers yes or no is set
+      coolingTowerOptionIsSet = true
+      dLInputObject.doesHaveCoolingTowers = doesHaveCoolingTowers
+      // Remove the feedback message if there is any
+      hideOrShowFeedback(feedbackContainerCoolingTowers, 'hide')
+    })
+    
+  });
+</script>
