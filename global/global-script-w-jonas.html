@@ -1,0 +1,72 @@
+<!-- Google Tag Manager - (GrundfosCampaign) - Blizzard Campaign 2.0 -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MK46N6H');
+</script>
+<!-- End Google Tag Manager -->
+  
+<style>
+.form-item-wrapper > .w-checkbox {
+  width: 100%;
+}
+.star-row {
+    display: flex;
+}
+</style>
+<script>
+  let counter = 0;
+  function checkIfAnalyticsLoaded() {
+    if (window.ga && ga.create) {
+      // Do tracking with new-style analytics
+      const userId = ga.getAll()[0].get('clientId');
+      ga('create', 'UA-195310179-1', 'auto');
+      ga('send', 'pageview', {
+        'dimension2': userId
+      });
+    } else if (window.urchinTracker) {
+      // Do tracking with old-style analytics
+      const userId = ga.getAll()[0].get('clientId');
+      ga('create', 'UA-195310179-1', 'auto');
+      ga('send', 'pageview', {
+        'dimension2': userId
+      });
+      console.log(userId);
+    } else {
+      // Retry. Probably want to cap the total number of times you call this.
+      if(counter < 10){
+        counter++;
+        setTimeout(checkIfAnalyticsLoaded, 500);
+      }
+    }
+  }
+  checkIfAnalyticsLoaded();
+</script>
+
+<script>
+  let anothercounter = 0;
+  // Script for adding unique identifier to hidden form field
+  function checkIfAnalyticsLoaded() {
+    if (window.ga && ga.create) {
+      // Do tracking with new-style analytics
+      if(document.getElementById("guid")){
+        const userId = ga.getAll()[0].get('clientId');
+        document.getElementById("guid").value = userId;
+      }
+    } else if (window.urchinTracker) {
+      // Do tracking with old-style analytics
+      if(document.getElementById("guid")){
+        const userId = ga.getAll()[0].get('clientId');
+        document.getElementById("guid").value = userId;
+      }
+    } else {
+      // Retry. Probably want to cap the total number of times you call this.
+      if(anothercounter < 10){
+        anothercounter++;
+        setTimeout(checkIfAnalyticsLoaded, 500);
+      }
+    }
+  }
+  checkIfAnalyticsLoaded();
+</script>
